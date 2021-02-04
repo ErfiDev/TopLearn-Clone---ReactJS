@@ -1,0 +1,99 @@
+.about-container{
+    position: absolute;
+    top: 200px;
+    left: 15%;
+    right: 15%;
+    z-index: 10;
+    width: 70%;
+    height: 35%;
+    background-color: #e8e8e8;
+    border-radius: 8px;
+    animation: about 0.6s ease-out;
+    font-family: vazir;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.about-title{
+    font-size: 22pt;
+    text-align: center;
+}
+
+.about-hr{
+    border: solid 2px #86aba1;
+    width: 80%;
+    border-radius: 5px;
+}
+
+.about-paragraf{
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 14pt;
+}
+
+.about-btn-container{
+    width: 50%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.about-btn-container a{
+    color: none;
+    text-decoration: none;
+}
+
+.about-btn-container button{
+    border-radius: 3px;
+    outline: none;
+    font-family: "Poppins" , sans-serif;
+    font-size: 15pt;
+    width: 140px;
+    padding: 5px;
+    transition: all 0.6s ease-in-out;
+    height: 50px;
+}
+
+.good-vote{
+    border: 2px solid #00af91;
+    color: #00af91;
+}
+.good-vote:hover{
+    background-color: #00af91;
+    color: rgb(236, 236, 236);
+}
+
+.bad-vote{
+    border: 2px solid #f05454;
+    color: #f05454;
+}
+.bad-vote:hover{
+    background-color: #f05454;
+    color: rgb(236, 236, 236);
+}
+
+.not-vote{
+    border: 2px solid #c5a880;
+    color: #c5a880;
+}
+.not-vote:hover{
+    background-color: #c5a880;
+    color: rgb(236, 236, 236);
+}
+
+.selected-vote{
+    text-decoration: line-through;
+}
+
+@keyframes about{
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+    }
+}

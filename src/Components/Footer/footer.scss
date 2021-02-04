@@ -1,0 +1,315 @@
+$bc : "background-color";
+
+@mixin Flex($direction , $wrap , $align-items , $justify-content)
+{
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    align-items: $align-items;
+    justify-content: $justify-content;
+}
+
+.footer-container{
+    width: 100%;
+    height: 350px;
+    @include Flex(column , nowrap , center , flex-start);
+    margin-top: 10vh;
+
+    div{
+        width: 100%;
+        height: auto;
+    }
+
+    .footer-header{
+        @include Flex(row , nowrap , center , center);
+        #{$bc}: #153248;
+        height: 200px;
+
+        .enmad-div{
+            width: 30%;
+            height: 100%;
+            @include Flex(row , nowrap , center , space-around);
+
+            div{
+                width: 30%;
+                height: 70%;
+                #{$bc}: white;
+                border-radius: 10px;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        .sendEmail-div{
+            width: 70%;
+            height: 100%;
+            @include Flex(row , nowrap , flex-start, center );
+            div{
+                width: 95%;
+                height: 45px;
+                margin-top: 40px;
+                @include Flex(row , nowrap , center , center);
+                font-family: vazir;
+                button{
+                    width: 17%;
+                    height: 100%;
+                    font-family: vazir;
+                    padding: 0;
+                    margin: 0;
+                    border: none;
+                    outline: none;
+                    border-bottom-left-radius: 5px;
+                    border-top-left-radius: 5px;
+                    #{$bc}: #61B832;
+                    color: white;
+                    font-size: 12pt;
+                }
+                .email-div{
+                    width: 41.5%;
+                    height: 100%;
+                }
+                .number-div{
+                    width: 41.5%;
+                    height: 100%;
+                }
+                div{
+                    margin: 0;
+                    @include Flex(row , nowrap , center , center);
+                    input{
+                        width: 90%;
+                        outline: none;
+                        border: none;
+                        height: 100%;
+                        direction: rtl;
+                        padding-right: 5px;
+                        &::placeholder{
+                            font-size: 11pt;
+                        }
+                    }
+                    span{
+                        width: 10%;
+                        height: 100%;
+                        @include Flex(row , nowrap , center , center );
+                        #{$bc}: white;
+                        color: gray;
+                    }
+                    .phone-span{
+                        border-top-right-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-main{
+        height: 75px;
+        #{$bc}: #153248;
+        @include Flex(row, nowrap, center, center);
+        .left-main-footer{
+            width: 20%;
+            height: 100%;
+            @include Flex(row, nowrap , center , center);
+            div{
+                width: 40px;
+                height: 40px;
+                #{$bc}: rgba(255, 255, 255, 0.082);
+                @include Flex(row,nowrap , center, center);
+                border-radius: 50%;
+                margin: 10px;
+                color: white;
+                cursor: pointer;
+                transition: all 0.5s ease;
+                &:hover{
+                    #{$bc}: rgba(255, 255, 255, 0.219);
+                }
+            }
+        }
+        .right-main-footer{
+            width: 80%;
+            height: 100%;
+            ul{
+                width: 100%;
+                height: 100%;
+                @include Flex(row , nowrap , center , flex-end);
+                list-style: none;
+                font-size: 10pt;
+                font-family: vazir;
+                color: white;
+                .f{
+                    margin-right: 60px;
+                }
+                li{
+                    margin-left: 40px;
+                    cursor: pointer;
+                    transition: all 0.5s ease;
+                    position: relative;
+                    &::after{
+                        content: "";
+                        background-color: #00bffe;
+                        box-shadow: 0 0 5px #00bffe;
+                        position: absolute;
+                        top: 35%;
+                        right: -10px;
+                        width: 5px;
+                        height: 5px;
+                        border-radius: 50%;
+                        #{$bc}: #00BFFE;
+                    }
+                    &:hover{
+                        color: #07BFE1;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer-footer{
+        #{$bc}: white;
+        height: 75px;
+        font-family: vazir;
+        @include Flex(row , nowrap , center , center);
+        p{
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            font-size: 11pt;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1220px)
+{
+    .right-main-footer{
+        ul{
+            font-size: 8pt !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 1115px)
+{
+    .footer-container{
+        height: 450px !important;
+        .footer-header{
+            flex-direction: column-reverse !important;
+            height: 300px !important;
+            .enmad-div{
+                width: 80% !important;
+                height: 55% !important;
+                justify-content: center !important;
+                div{
+                    width: 15% !important;
+                    height: 80% !important;
+                    margin: 5px;
+                }
+            }
+            .sendEmail-div{
+                width: 80% !important;
+                height: 45% !important;
+                align-items: center !important;
+                div{
+                    margin-top: 0px !important;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1062px)
+{
+    .footer-container{
+        height: 550px !important;
+
+        .footer-main{
+            height: 175px !important;
+            flex-direction: column-reverse !important;
+
+            .right-main-footer{
+                width: 100% !important;
+                ul{
+                    font-size: 11pt !important;
+                    justify-content: space-around !important;
+                    li{
+                        margin-left: 0px !important;
+                    }
+                }
+            }
+
+            .left-main-footer{
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1038px)
+{
+    .right-main-footer{
+        ul{
+            font-size: 10pt !important; 
+            .f{
+                margin-right: 0px !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 898px)
+{
+    .sendEmail-div{
+        div{
+            button{
+                font-size: 10pt !important;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 854px)
+{
+    .right-main-footer{
+        ul{
+            flex-wrap: wrap !important;
+            justify-content:  flex-start !important;
+            li:nth-child(1){
+                &::after{
+                    right: 35% !important;
+                }
+            }
+            li:nth-child(3){
+                &::after{
+                    right: 15% !important;
+                }
+            }
+            li:nth-child(6){
+                &::after{
+                    right: 12% !important;
+                }
+            }
+            li:nth-child(7){
+                &::after{
+                    right: 8% !important;
+                }
+            }
+            li{
+                width: 31% !important;
+                text-align: center !important;
+                &::after{
+                    right: 28% !important; 
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 665px)
+{
+    .footer-footer{
+        p{
+            font-size: 10pt !important;
+        }
+    }
+}
