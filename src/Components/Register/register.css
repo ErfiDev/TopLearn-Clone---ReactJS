@@ -1,9 +1,0 @@
-.register-div{
-    width: 60vw;
-    height: 450px;
-    box-shadow: 0 0 20px #ccc;
-    -webkit-box-shadow: 0 0 20px #ccc;
-    -moz-box-shadow: 0 0 20px #ccc;
-    padding: 20px;
-    border-radius: 10px;
-}
