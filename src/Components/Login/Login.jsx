@@ -36,10 +36,11 @@ const Login = ({history})=>{
             }
             
         }catch(error){
-            toast.error("not found please try again" , {
+            toast.error("not found please Sign Up" , {
                 position: "bottom-left",
                 closeButton: true
             });
+            history.replace("/register");
         }
     };
 
