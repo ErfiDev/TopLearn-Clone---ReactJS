@@ -1,52 +1,28 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {withRouter , Link} from 'react-router-dom';
 import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
 import Checkbox from '@material-ui/core/Checkbox';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import {userLogin} from '../../Services/userService';
-import {toast} from 'react-toastify';
 import Helmet from 'react-helmet';
+import {useDispatch , useSelector} from 'react-redux';
+import {emailLogin , passLogin , LoginSend} from '../../Action/LoginAction';
 
 import "./login.css";
 
 const Login = ({history})=>{
 
-    const [email , setEmail] = useState("");
-    const [password , setPassword] = useState("");
-
-    const submitForm = async (e)=>{
-        e.preventDefault();
-        const User = {
-            email,
-            password
-        };
-        
-        try{
-            const {status , data} = await userLogin(User);
-            if(status === 200)
-            {
-                toast.success("welcome back." , {
-                    position: "bottom-left" ,
-                    closeButton: true
-                });
-                localStorage.setItem("token" , data.token);
-                history.replace("/");
-                reset();
-            }
-            
-        }catch(error){
-            toast.error("not found please Sign Up" , {
-                position: "bottom-left",
-                closeButton: true
-            });
-            history.replace("/register");
-        }
-    };
-
-    const reset = ()=>{
-        setEmail("");
-        setPassword("");
+    const email = useSelector(state => state.emailLogin);
+    const pass = useSelector(state => state.passLogin);
+    const Check = useSelector(state => state.Login);
+    const dis = useDispatch();
+    if(Check === "Loged in")
+    {
+        history.push("/");
+    }
+    if(Check === "please sign up")
+    {
+        history.push("/register");
     }
 
     return(
@@ -57,7 +33,7 @@ const Login = ({history})=>{
             </Helmet>
 
             <h2 className="login-title">ورود به سایت</h2>
-            <form onSubmit={submitForm}>
+            <form onSubmit={e => dis(LoginSend(e))}>
 
                 <div id="user-div" className="input-div">
                     <input 
@@ -67,7 +43,7 @@ const Login = ({history})=>{
                         autoComplete="off" 
                         placeholder="ایمیل" 
                         value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={(e)=> dis(emailLogin(e))}
                     />
                     <span className="span-icon">
                         <EmailIcon fontSize='small' color="inherit" />
@@ -79,8 +55,8 @@ const Login = ({history})=>{
                         type="password" 
                         id="pass-input"
                         placeholder="رمز عبور" 
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        value={pass}
+                        onChange={e => dis(passLogin(e))}
                         minLength="8"
                     />
                     <span className="span-icon">
