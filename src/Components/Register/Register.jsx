@@ -1,66 +1,22 @@
-import React,{useState} from 'react';
+import React from 'react';
 import EmailIcon from '@material-ui/icons/Email';
-import {toast , ToastContainer} from 'react-toastify';
-import {userRegister} from '../../Services/userService';
-import {withRouter} from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
+import {useSelector , useDispatch} from 'react-redux';
+import {emailRegis,familyRegis,fullnameRegis,nameRegis,pass1Regis,pass2Regis,RegisterSend} from '../../Action/RegisterAction';
 
 import "./register.css";
 
-const Register = ({history})=>{
+const Register = ()=>{
 
-    const [name , setName] = useState("");
-    const [family , setFamily] = useState("");
-    const [fullname , setFullname] = useState("");
-    const [password , setPassword] = useState("");
-    const [password2 , setPassword2] = useState("");
-    const [email , setEmail] = useState("");
+    const name = useSelector(state => state.nameRegis);
+    const fullname = useSelector(state => state.fullnameRegis);
+    const family = useSelector(state => state.familyRegis);
+    const email = useSelector(state => state.emailRegis);
+    const pass1 = useSelector(state => state.pass1Regis);
+    const pass2 = useSelector(state => state.pass2Regis);
 
-    const submitForm = async (e)=>{
-        e.preventDefault();
-        if(password === password2)
-        {
-            const User = {
-                fullname,
-                password,
-                email
-            };
-            try{
-                const {status} = await userRegister(User);
-                if(status === 201)
-                {
-                    toast.success("User Created please login" , {
-                        position: "bottom-left",
-                        closeButton: true
-                    });
-                    resetForm();
-                    history.push("/login");
-                }
-            }catch(error){
-                console.log(error);
-                toast.error("Validation is failed." , {
-                    position: "bottom-left",
-                    closeButton: true
-                });
-            }
-        }
-        else{
-            toast.error("password is not match" , {
-                position: "bottom-left",
-                closeButton: true
-            });
-        }
-    };
-
-    function resetForm()
-    {
-        setName("");
-        setFamily("");
-        setFullname("");
-        setEmail("");
-        setPassword("");
-        setPassword2("");
-    }
+    const dis = useDispatch();
 
     return(
         <div className="register-div" style={{fontFamily: "Poppins"}} >
@@ -68,7 +24,7 @@ const Register = ({history})=>{
                 <title>Toplearn / Register</title>
             </Helmet>
 
-            <form onSubmit={submitForm}>
+            <form onSubmit={e => dis(RegisterSend(e))}>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label for="validationDefault01">First name</label>
@@ -78,7 +34,7 @@ const Register = ({history})=>{
                             id="validationDefault01" 
                             placeholder="First name" 
                             value={name}
-                            onChange={e => setName(e.target.value)}
+                            onChange={e => dis(nameRegis(e))}
                             required 
                         />
                     </div>
@@ -91,7 +47,7 @@ const Register = ({history})=>{
                             id="validationDefault02" 
                             placeholder="Last name" 
                             value={family}
-                            onChange={e => setFamily(e.target.value)}
+                            onChange={e => dis(familyRegis(e))}
                             required 
                         />
                     </div>
@@ -112,7 +68,7 @@ const Register = ({history})=>{
                                 placeholder="Username" 
                                 aria-describedby="inputGroupPrepend2" 
                                 value={email}
-                                onChange={e => setEmail(e.target.value)}
+                                onChange={e => dis(emailRegis(e))}
                                 required 
                             />
                         </div>
@@ -128,7 +84,7 @@ const Register = ({history})=>{
                             id="validationDefault01" 
                             placeholder="Full name" 
                             value={fullname}
-                            onChange={e => setFullname(e.target.value)}
+                            onChange={e => dis(fullnameRegis(e))}
                             required 
                             minLength="5"
                         />
@@ -143,8 +99,8 @@ const Register = ({history})=>{
                             className="form-control" 
                             id="validationDefault01" 
                             placeholder="Password" 
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
+                            value={pass1}
+                            onChange={e => dis(pass1Regis(e))}
                             required 
                             minLength="8"
                         />
@@ -156,8 +112,8 @@ const Register = ({history})=>{
                             className="form-control" 
                             id="validationDefault01" 
                             placeholder="Password again" 
-                            value={password2}
-                            onChange={e => setPassword2(e.target.value)}
+                            value={pass2}
+                            onChange={e => dis(pass2Regis(e))}
                             required 
                             minLength="8"
                         />
@@ -180,4 +136,4 @@ const Register = ({history})=>{
     );
 };
 
-export default withRouter(Register);
+export default Register;
