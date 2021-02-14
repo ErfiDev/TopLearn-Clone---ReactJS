@@ -127,3 +127,36 @@
     background-color: #007965;
     color: white;
 }
+
+
+@media only screen and (max-width: 1090px)
+{
+    .login-div{
+        width: 50% !important;
+    }
+}
+@media only screen and (max-width: 920px)
+{
+    .login-div{
+        width: 60% !important;
+    }
+}
+@media only screen and (max-width: 750px)
+{
+    .login-div{
+        width: 70% !important;
+    }
+}
+@media only screen and (max-width: 580px)
+{
+    .login-div{
+        width: 80% !important;
+        height: 500px !important;
+    }
+}
+@media only screen and (max-width: 450px)
+{
+    .login-div{
+        width: 95% !important;
+    }
+}

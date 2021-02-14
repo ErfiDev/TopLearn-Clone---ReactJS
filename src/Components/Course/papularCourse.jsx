@@ -1,31 +1,10 @@
 import React from 'react';
 import DivCourseList from './divCourseList';
+import {useSelector} from 'react-redux';
 
 const PapularCourse = ()=> {
-
-    const CourseListFunction = ()=>{
-        const Arr = [
-            {imgSrc: "course-img-1.jpg" , title: "آموزش ری اکت ناتیو"},
-            {imgSrc: "course-img.jpg" , title: "آموزش جامع فلاتر"}, 
-            {imgSrc: "course-img-2.png" , title: "آموزش فریم ورک Vue"},
-            {imgSrc: "course-img-3.png" , title: "اموزش ناکست جی اس"}
-        ];
-        const RandomNum = Math.floor(Math.random() * Arr.length);
-        return Arr[RandomNum];
-    };
-
-    const Creative = ()=>{
-        let element = [];
-        for(let i = 0; i <= 7 ; i++)
-        {
-            let x = CourseListFunction();
-            let {imgSrc , title} = x;
-            element.push({i: <DivCourseList imgSrc={imgSrc} courseTitle={title} />});
-        }
-        return element;
-    };
-    let x = Creative();
-
+    
+    let Selector = useSelector(state => state.course);
     return (  
         <div className="papular-course-container">
             <div className="papular-title">
@@ -34,7 +13,14 @@ const PapularCourse = ()=> {
                 </h5>
             </div>
             <div className="papular-course">
-                {x.map(item => item.i)}
+                {Selector.map(item  => (
+                    <DivCourseList 
+                        imgSrc={item.imageUrl}
+                        courseTitle={item.title}
+                        Price={item.price}
+                        key={item._id}
+                    />
+                ))}
             </div>
         </div>
     );
