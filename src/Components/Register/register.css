@@ -1,6 +1,7 @@
 .register-div{
     width: 60vw;
-    height: 450px;
+    min-height: 450px;
+    height: auto;
     box-shadow: 0 0 20px #ccc;
     -webkit-box-shadow: 0 0 20px #ccc;
     -moz-box-shadow: 0 0 20px #ccc;
