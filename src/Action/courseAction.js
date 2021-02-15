@@ -1,16 +1,18 @@
-import courseService from '../Services/courseService';
-
 const courseAction = ()=>{
     return async dispatch =>{
-        const {data} = await courseService();
-        const {courses} = await data;
-        const CopyIndex1 = courses[4];
-        const CopyIndex2 = courses[3];
-        const CopyIndex3 = courses[2];
-        const CopyIndex4 = courses[1];
-        const CopyIndex5 = courses[6];
-        courses.push(CopyIndex1,CopyIndex2,CopyIndex3,CopyIndex4,CopyIndex5);
-        await dispatch({type: "INIT" , payload: courses});
+        let All = [];
+        for(var i = 0; i <= 11 ; i++)
+        {
+            let option = [
+                {title: "آموزش طراحی سایت با جنگو" , imgSrc: "course1.jpg"},
+                {title: "آموزش سی شارپ پیشرفته" , imgSrc: "course2.png"},
+                {title: "آموزش جامع لینوکس" , imgSrc: "course3.png"},
+                {title: "آموزش پایتون" , imgSrc: "course4.png"}
+            ];
+            let Random = Math.floor(Math.random() *option.length);
+            All.push(option[Random]);
+        }
+        await dispatch({type: "INIT" , payload: All});
     }
 }
 

@@ -11,9 +11,7 @@ const CourseList = () => {
             
             {Selector.map(item => (
                 <DivCourseList 
-                    key={item._key}
-                    Price={item.price}
-                    imgSrc={item.imageUrl}
+                    imgSrc={item.imgSrc}
                     courseTitle={item.title}
                 />
             ))}

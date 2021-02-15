@@ -11,6 +11,6 @@ const Store = createStore
     )    
 );
 
-Store.dispatch(courseAction());    
+Store.dispatch(courseAction());   
 
 export default Store;

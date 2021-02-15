@@ -10,20 +10,11 @@ import {emailLogin , passLogin , LoginSend} from '../../Action/LoginAction';
 
 import "./login.css";
 
-const Login = ({history})=>{
+const Login = ()=>{
 
     const email = useSelector(state => state.emailLogin);
     const pass = useSelector(state => state.passLogin);
-    const Check = useSelector(state => state.Login);
     const dis = useDispatch();
-    if(Check === "Loged in")
-    {
-        history.push("/");
-    }
-    if(Check === "please sign up")
-    {
-        history.push("/register");
-    }
 
     return(
         <div className="login-div">

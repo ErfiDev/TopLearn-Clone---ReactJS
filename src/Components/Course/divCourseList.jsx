@@ -3,11 +3,11 @@ import CommentIcon from '@material-ui/icons/ModeComment';
 import PersonIcon from '@material-ui/icons/Person';
 import Timer from '@material-ui/icons/Timer';
 
-const DivCourseList = ({imgSrc , courseTitle , Price , key}) => {
+const DivCourseList = ({imgSrc , courseTitle}) => {
     return (  
-        <div className="course-div" key={key}>
+        <div className="course-div">
                 <div className="course-img-container">
-                    <img src={`https://toplearnapi.ghorbany.dev/${imgSrc}`} alt="course" />
+                    <img src={`./img/${imgSrc}`} alt="course" />
                 </div>
 
                 <div className="course-title-info">
@@ -33,7 +33,7 @@ const DivCourseList = ({imgSrc , courseTitle , Price , key}) => {
 
                 <div className="course-time-container">
                     <p className="course-price">
-                        {Price}
+                        150,000,000
                         تومان
                     </p>
 

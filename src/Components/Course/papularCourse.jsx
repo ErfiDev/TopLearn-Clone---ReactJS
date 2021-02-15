@@ -15,10 +15,8 @@ const PapularCourse = ()=> {
             <div className="papular-course">
                 {Selector.map(item  => (
                     <DivCourseList 
-                        imgSrc={item.imageUrl}
+                        imgSrc={item.imgSrc}
                         courseTitle={item.title}
-                        Price={item.price}
-                        key={item._id}
                     />
                 ))}
             </div>
