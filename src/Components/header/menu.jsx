@@ -3,9 +3,12 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import {Link , withRouter} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const SimpleMenu = ({location})=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const userName = useSelector(state => state.User);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -16,14 +19,20 @@ const SimpleMenu = ({location})=> {
   };
 
   let buttonName = "Accounts";
-  if(location.pathname === "/register")
+  if(userName.fullname)
   {
-    buttonName = "Register";
+    buttonName = userName.fullname;
   }
-  if(location.pathname === "/login")
-  {
-    buttonName = "Login"
-  };
+  else{
+    if(location.pathname === "/register")
+    { 
+      buttonName = "Register";
+    }
+    if(location.pathname === "/login")
+    {
+      buttonName = "Login"
+    }
+  }
   
 
   return (

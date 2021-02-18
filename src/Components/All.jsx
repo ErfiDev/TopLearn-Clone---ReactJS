@@ -1,4 +1,6 @@
 import React from 'react';
+import decoder from '../utils/decoder';
+import {connect} from 'react-redux';
 import {Route , Switch} from 'react-router-dom';
 import Header from './header/header';
 import Nav from './NavBar/nav';
@@ -9,10 +11,30 @@ import Footer from './Footer/Footer';
 import Register from './Register/Register';
 import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
+import {createUser, deleteUser} from '../Action/userAction';
 
 
 class All extends React.Component
 {
+
+    componentDidMount()
+    {
+        const Token = localStorage.getItem("token");
+        const {dispatch} = this.props;
+        if(Token)
+        {
+            const Decode = decoder(Token);
+            const DateNow = Date.now() / 1000;
+            if(Decode.payload.exp < DateNow)
+            {
+                localStorage.removeItem("token");
+                dispatch(deleteUser());
+            }
+            else{
+                dispatch(createUser(Decode.payload.user));
+            }
+        }
+    }
 
     render = ()=>
     {        
@@ -39,4 +61,9 @@ class All extends React.Component
     }
 };
 
-export default All;
+const mapStateToProp = State =>
+{
+    return {State}
+}
+
+export default connect(mapStateToProp)(All);

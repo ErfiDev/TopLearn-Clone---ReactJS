@@ -36,7 +36,6 @@ export const LoginSend = (e)=>{
                 localStorage.setItem("token" , data.token);
                 await dispatch({type: "RES_PASS_LOGIN"});   
                 await dispatch({type: "RES_EMAIL_LOGIN"});
-
                 await dispatch({type: "INIT_LOGIN" , payload: "Loged in"})
             }
         }catch(error){

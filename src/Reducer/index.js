@@ -3,6 +3,7 @@ import toggleToastReducer from './toggleToastReducer';
 import courseMakerReducer from './courseMakerReducer';
 import {Login , passLogin , emailLogin} from './login';
 import {Register,emailRegis,familyRegis,fullnameRegis,nameRegis,pass1Regis,pass2Regis} from './register';
+import User from './user';
 
 const Reducers = combineReducers({
     toggleToast: toggleToastReducer,
@@ -16,7 +17,8 @@ const Reducers = combineReducers({
     fullnameRegis,
     nameRegis,
     pass1Regis,
-    pass2Regis
+    pass2Regis,
+    User
 });
 
 export default Reducers;
