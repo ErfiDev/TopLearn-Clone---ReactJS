@@ -1,14 +1,3 @@
-export const Login = (state = "" , action)=>{
-    switch(action.type)
-    {
-        case "INIT_LOGIN":
-            return action.payload;
-        
-        default: return state;
-    }
-}
-
-
 export const emailLogin = (state = "" , action)=>{
     switch(action.type)
     {

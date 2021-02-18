@@ -29,14 +29,11 @@ export const LoginSend = (e)=>{
             const {status , data} = await userLogin(User);
             if(status === 200)
             {
-                toast.success("welcome back." , {
-                    position: "bottom-left" ,
-                    closeButton: true
-                });
                 localStorage.setItem("token" , data.token);
                 await dispatch({type: "RES_PASS_LOGIN"});   
                 await dispatch({type: "RES_EMAIL_LOGIN"});
-                await dispatch({type: "INIT_LOGIN" , payload: "Loged in"})
+                window.location.reload();
+                window.location.replace("/");
             }
         }catch(error){
             toast.error("not found please Sign Up" , {

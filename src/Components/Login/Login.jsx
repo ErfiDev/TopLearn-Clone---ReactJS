@@ -10,16 +10,11 @@ import {emailLogin , passLogin , LoginSend} from '../../Action/LoginAction';
 
 import "./login.css";
 
-const Login = ({history})=>{
+const Login = ()=>{
 
     const email = useSelector(state => state.emailLogin);
     const pass = useSelector(state => state.passLogin);
-    const Selector = useSelector(state => state.Login);
     const dis = useDispatch();
-    if(Selector === "Loged in")
-    {
-        history.replace("/");
-    }
 
     return(
         <div className="login-div">

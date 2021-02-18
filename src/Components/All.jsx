@@ -12,9 +12,10 @@ import Register from './Register/Register';
 import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
 import {createUser, deleteUser} from '../Action/userAction';
+import {toast} from 'react-toastify';
 
 
-class All extends React.Component
+class All extends React.PureComponent
 {
 
     componentDidMount()
@@ -32,6 +33,12 @@ class All extends React.Component
             }
             else{
                 dispatch(createUser(Decode.payload.user));
+                setTimeout(()=> {
+                    toast.success(`welcome back ${this.props.State.User.fullname}` , {
+                        position: "top-center",
+                        closeOnClick: true
+                    });
+                } , 3000);
             }
         }
     }

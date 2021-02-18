@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router';
 import EmailIcon from '@material-ui/icons/Email';
 import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
@@ -7,7 +8,7 @@ import {emailRegis,familyRegis,fullnameRegis,nameRegis,pass1Regis,pass2Regis,Reg
 
 import "./register.css";
 
-const Register = ()=>{
+const Register = ({history})=>{
 
     const name = useSelector(state => state.nameRegis);
     const fullname = useSelector(state => state.fullnameRegis);
@@ -15,8 +16,13 @@ const Register = ()=>{
     const email = useSelector(state => state.emailRegis);
     const pass1 = useSelector(state => state.pass1Regis);
     const pass2 = useSelector(state => state.pass2Regis);
+    const Init = useSelector(state => state.Register);
 
     const dis = useDispatch();
+    if(Init === "please login")
+    {
+        history.push("/login");
+    }
 
     return(
         <div className="register-div" style={{fontFamily: "Poppins"}} >
@@ -136,4 +142,4 @@ const Register = ()=>{
     );
 };
 
-export default Register;
+export default withRouter(Register);
