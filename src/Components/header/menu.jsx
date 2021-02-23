@@ -3,11 +3,11 @@ import {isEmpty} from 'lodash';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {Link , withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useSelector , useDispatch} from 'react-redux';
 import {deleteUser} from '../../Action/userAction';
 
-const SimpleMenu = ({location})=> {
+const SimpleMenu = ()=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dis = useDispatch();
 
@@ -77,4 +77,4 @@ const SimpleMenu = ({location})=> {
   );
 }
 
-export default withRouter(SimpleMenu);
+export default SimpleMenu;
