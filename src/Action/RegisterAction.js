@@ -61,7 +61,6 @@ export const RegisterSend = (e)=>{
             };
             try{
                 const {status} = await userRegister(User);
-                console.log(status);
                 if(status === 201)
                 {
                     toast.success("User Created please login" , {
@@ -72,12 +71,17 @@ export const RegisterSend = (e)=>{
                 }
             }catch(error){
                 console.log(error);
-                toast.error("This account has already been created please login" , {
+                toast.error("Request Faild" , {
                     position: "bottom-left",
                     closeButton: true
                 });
-                await dispatch({type: "INIT_REGIS" , payload: "please login"});
             }
+        }
+        else{
+            toast.error("password not match",{
+                position: "bottom-left",
+                closeOnClick: true
+            });
         }
     }
 }

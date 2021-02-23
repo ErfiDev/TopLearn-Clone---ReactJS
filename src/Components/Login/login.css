@@ -121,13 +121,22 @@
     background-color: white;
     color: #007965;
     font-size: 15pt;
-    transition: all 0.5s ease-in;
+    transition: all 0.4s ease;
+    position: relative;
 }
-#submit-btn:hover{
-    background-color: #007965;
-    color: white;
+#submit-btn::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 100%;
+    transition: all 0.3s ease;
+    background-color: #00796538;
 }
-
+#submit-btn:hover::after{
+    width: 100%;
+}
 
 @media only screen and (max-width: 1090px)
 {
