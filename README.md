@@ -1,5 +1,4 @@
 # MERN Stack Project
-<br>
 
 ## Introduction
 Created by erfan hanifezade for testing and learning only
