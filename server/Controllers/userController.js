@@ -112,7 +112,40 @@ async function loginUser(req , res)
     }
 }
 
+async function logoutUser(req , res)
+{
+    try{
+        let {token} = req.body;
+
+        //Check
+        if(!token)
+        {
+            return res.json({
+                msg: 'Please complete the required item',
+                status: 406
+            })
+        }
+
+        let decode = await jwt.decode(token , {complete: true});
+        //Token validation 
+        if(decode === null)
+        {
+            return res.json({
+                msg: 'Invalid token!',
+                status: 406
+            });
+        }
+        res.json({
+            status: 200
+        });
+    }
+    catch(err){
+        res.json({msg: err , status: 500});
+    }
+}
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 }
