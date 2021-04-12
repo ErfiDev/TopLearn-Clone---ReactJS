@@ -82,26 +82,29 @@ async function loginUser(req , res)
         else
         {
             let findByEmail = await UserModel.findOne({email});
-            let findByPassword = await UserModel.findOne({password});
-            if(findByEmail && !findByPassword)
+            if(findByEmail)
             {
-                return res.json({
-                    msg: 'Wrong password please enter again',
-                    status: 406
-                })
-            }        
-            if(!findByEmail)
-            { 
-                return res.json({
-                    status: 404,
-                    msg: 'This user not fund please sign up'
+                let decoding = await bcrypt.compare(password , findByEmail.password);
+                if(!decoding)
+                {
+                    return res.json({
+                        msg: 'Passwords do not match',
+                        status: 406
+                    });
+                }
+                
+                let token = await jwt.sign({data: findByEmail} , process.env.ACCESS_TOKEN_SECRET);
+                res.json({
+                    token,
+                    status: 200
                 });
             }
-            let token = jwt.sign({data: findByEmail} , process.env.ACCESS_TOKEN_SECRET);
-            res.json({
-                data: token,
-                status: 200
-            });
+            else{
+                res.json({
+                    msg: 'This user not fund please sign up',
+                    status: 404
+                });
+            }
         }
     }catch(err)
     {
