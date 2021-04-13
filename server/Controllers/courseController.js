@@ -14,7 +14,7 @@ async function postCourse(req , res)
         return res.json({status: 406 , msg: errors});
     }
 
-    const {title,price,courseCategory,imgSrc,courseTime} = req.body;
+    const {title,price,courseCategory,imgSrc,courseTime,teacher} = req.body;
     let findByTitle = await CourseModel.find({title});
     if(findByTitle.length > 0)
     {
@@ -30,7 +30,8 @@ async function postCourse(req , res)
             price,
             courseCategory,
             imgSrc,
-            courseTime
+            courseTime,
+            teacher
         });
 
         await data.save()
@@ -38,7 +39,6 @@ async function postCourse(req , res)
         .catch(err => res.json({status: 500 , msg: err}));
     }
 }
-
 
 async function postCategory(req , res)
 {

@@ -9,7 +9,8 @@ function createCourseValidation(data)
         imgSrc: joi.string().required(),
         price: joi.number().required(),
         courseCategory: joi.array(),
-        courseTime: joi.string().required()
+        courseTime: joi.string().required(),
+        teacher: joi.string().min(5).required()
     });
 
     return courseSchema.validate(data);
