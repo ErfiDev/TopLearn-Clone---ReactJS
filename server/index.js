@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 const userApi = require('./Routes/User');
+const courseApi = require('./Routes/Course');
 
 const App = express();
 const PORT = process.env.PORT || 4000;
@@ -22,7 +23,8 @@ mongoose.connect(
     ()=>{ console.log('Connecting DataBase Successfully!') }
 );
 
-//Use Routes
+//Routes Middlewares
 App.use('/api/user' , userApi);
+App.use('/api/course' , courseApi);
 
 App.listen(PORT , ()=>{ console.log(`Server start on port: ${PORT}`) });
