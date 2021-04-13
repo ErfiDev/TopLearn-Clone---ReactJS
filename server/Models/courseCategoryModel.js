@@ -7,10 +7,6 @@ const courseCategoryModel = new schema({
         type: String,
         required: true
     },
-    id: {
-        type: Number,
-        required: true
-    },
     uuid: {
         type: String,
         default: ()=> uuidv4()

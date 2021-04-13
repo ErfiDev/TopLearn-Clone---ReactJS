@@ -1,76 +1,65 @@
 const CourseModel = require('../Models/CourseModel');
 const CategoryModel = require('../Models/courseCategoryModel');
+const {createCourseValidation , createCategoryValidation} = 
+require('../validations/courseValidator');
 
 async function postCourse(req , res)
 {
-    try{
-        let {title,imgSrc,price,courseCategoryName,courseTime} = req.body;
-        if(!title || !imgSrc || !courseCategoryName || !price || !courseTime)
-        {
-            return res.json({
-                msg: 'Please complete the required items',
-                status: 406
-            });
-        }
-        else
-        {
-            let findByTitle = await CourseModel.find({title});
-            if(findByTitle.length > 0)
-            {
-                return res.json({
-                    msg: 'This title has been registerd, please change it',
-                    status: 406
-                });
-            }
-            else
-            {
-                let data = await new CourseModel({
-                    title,
-                    price,
-                    courseCategoryName,
-                    imgSrc,
-                    courseTime
-                });
-
-                await data.save()
-                .then(()=> res.json({status: 201}))
-                .catch(err => res.json({status: 500 , msg: err}));
-            }
-        }
-    }
-    catch(err)
+    let errors = [];
+    let {error} = createCourseValidation(req.body);
+    if(error)
     {
-        res.json({
-            msg: err,
-            status: 500
-        });
-    };
-}
+        let {details} = error;
+        details.forEach(item => errors.push(item.message));
+        return res.json({status: 406 , msg: errors});
+    }
 
-async function postCategory(req , res)
-{
-    try{
-        let {title , id , courses} = req.body;
-        if(!title || !id || !courses)
-        {
-            return res.json({
-                msg: 'Please complete the required items',
-                status: 406
-            })
-        }
-        let data = await new CategoryModel({
+    const {title,price,courseCategory,imgSrc,courseTime} = req.body;
+    let findByTitle = await CourseModel.find({title});
+    if(findByTitle.length > 0)
+    {
+        return res.json({
+            msg: 'This title has been registerd, please change it',
+            status: 406
+        });
+    }
+    else
+    {
+        let data = await new CourseModel({
             title,
-            id,
-            courses
+            price,
+            courseCategory,
+            imgSrc,
+            courseTime
         });
 
         await data.save()
         .then(()=> res.json({status: 201}))
-        .catch(err => res.json({msg: err , status: 500}))
+        .catch(err => res.json({status: 500 , msg: err}));
     }
-    catch(err){
-        res.json({msg: err , status: 500});
+}
+
+
+async function postCategory(req , res)
+{
+    let errors = [];
+    let {error} = createCategoryValidation(req.body);
+    if(error)
+    {
+        let {details} = error;
+        details.forEach(item => errors.push(item.message));
+        return res.json({status: 406 , msg: errors});
     }
+
+
+    let {title} = req.body;
+    let data = await new CategoryModel({
+        title
+    });
+
+    await data.save()
+    .then(()=> res.json({status: 201}))
+    .catch(err => res.json({msg: err , status: 500}))
 }
 
 async function deleteCourse(req , res)

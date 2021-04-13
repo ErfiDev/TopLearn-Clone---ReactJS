@@ -10,7 +10,7 @@ const CourseModel = new schema({
     title: {required: true , type: String},
     imgSrc: {required: true , type: String},
     price: {required: true , type: Number},
-    courseCategoryName: {required: true , type: String},
+    courseCategory: {required: true , type: Array},
     courseTime: {required: true , type: String},
     popular: Boolean
 });
