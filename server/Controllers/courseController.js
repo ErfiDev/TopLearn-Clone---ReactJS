@@ -97,8 +97,38 @@ async function deleteCourse(req , res)
     }
 }
 
+async function deleteCategory(req , res)
+{
+    let {title} = req.params;
+    if(!title) 
+    {
+        return res.json({
+            msg: 'Please provide required parameter',
+            status: 406
+        })
+    }
+
+    let findByTitle = await CategoryModel.findOne({title});
+    if(findByTitle === null)
+    {
+        return res.json({
+            msg: 'Not found category!',
+            status: 404
+        })
+    }
+    else
+    {
+        let findAndDelete = await CategoryModel.findOneAndDelete({title});
+        res.json({
+            msg: findAndDelete,
+            status: 200
+        });
+    }
+}
+
 module.exports = {
     postCourse,
     postCategory,
-    deleteCourse
+    deleteCourse,
+    deleteCategory
 }
