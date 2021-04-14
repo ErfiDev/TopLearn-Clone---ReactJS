@@ -1,7 +1,11 @@
 const CourseModel = require('../Models/CourseModel');
 const CategoryModel = require('../Models/courseCategoryModel');
-const {createCourseValidation , createCategoryValidation , getCourseValidation} = 
-require('../validations/courseValidator');
+const {
+    createCourseValidation,
+    createCategoryValidation ,
+    getCourseValidation,
+    getCategoriesValidation
+} = require('../validations/courseValidator');
 
 async function getCourse(req , res)
 {
@@ -75,6 +79,41 @@ async function postCourse(req , res)
         await data.save()
         .then(()=> res.json({status: 201}))
         .catch(err => res.json({status: 500 , msg: err}));
+    }
+}
+
+async function getCategories(req , res)
+{
+    if(req.url === '/categories')
+    {
+        let findAll = await CategoryModel.find();
+        return res.json(findAll);
+    }
+    else{
+        let errors = [];
+        let {count , from} = req.query;
+        let {error} = getCategoriesValidation(req.query);
+        if(error)
+        {
+            let {details} = error;
+            details.forEach(item => errors.push(item.message));
+            return res.json({status: 406 , msg: errors});
+        }
+        if(count && !from)
+        {
+            let find = await CategoryModel.find().limit(parseInt(count));
+            return res.json({
+                data: find,
+                status: 200
+            });
+        }
+
+        let find = await CategoryModel.find()
+        .limit(parseInt(count)).skip(parseInt(from));
+        res.json({
+            data: find,
+            status: 200
+        })
     }
 }
 
@@ -169,5 +208,6 @@ module.exports = {
     postCategory,
     deleteCourse,
     deleteCategory,
-    getCourse
+    getCourse,
+    getCategories
 }

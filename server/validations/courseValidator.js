@@ -26,6 +26,16 @@ function getCourseValidation(data)
     return getSchema.validate(data);
 }
 
+function getCategoriesValidation(data)
+{
+    const getSchema = joi.object({
+        count: joi.number().required(),
+        from: joi.number()
+    });
+
+    return getSchema.validate(data);
+}
+
 function createCategoryValidation(data)
 {
     const categorySchema = joi.object({
@@ -38,5 +48,6 @@ function createCategoryValidation(data)
 module.exports = {
     createCourseValidation,
     createCategoryValidation,
-    getCourseValidation
+    getCourseValidation,
+    getCategoriesValidation
 }
