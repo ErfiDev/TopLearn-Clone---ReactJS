@@ -1,7 +1,45 @@
 const CourseModel = require('../Models/CourseModel');
 const CategoryModel = require('../Models/courseCategoryModel');
-const {createCourseValidation , createCategoryValidation} = 
+const {createCourseValidation , createCategoryValidation , getCourseValidation} = 
 require('../validations/courseValidator');
+
+async function getCourse(req , res)
+{
+    const {count , from} = req.params;
+    const {error} = await getCourseValidation(req.params);
+    if(error)
+    {
+        let {details} = error;
+        details.forEach(item => errors.push(item.message));
+        return res.json({status: 406 , msg: errors});
+    }
+    else
+    {
+        if(count && !from)
+        {
+            let find = await CourseModel.find({}).limit(parseInt(count));
+            return res.json({status: 200 , data: find});
+        }
+        if(count && from)
+        {   
+            let all = [];
+            let findAll = await CourseModel.find({},{courseCategory: 1,uuid: 1,_id: 0});
+            
+            findAll.forEach(item => {
+                if(item.courseCategory.includes(from))
+                {
+                    return all.push(item.uuid);
+                }else null
+            });
+
+            if(all.length <= 0){
+                return res.json({msg: 'Category not found!' , status: 400});
+            }
+            let find = await CourseModel.find({uuid: {$in : all}}).limit(parseInt(count));
+            return res.json({status: 200 , data: find});
+        }
+    }
+}
 
 async function postCourse(req , res)
 {
@@ -130,5 +168,6 @@ module.exports = {
     postCourse,
     postCategory,
     deleteCourse,
-    deleteCategory
+    deleteCategory,
+    getCourse
 }
