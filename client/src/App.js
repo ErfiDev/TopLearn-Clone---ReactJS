@@ -9,7 +9,7 @@ const App = ()=>{
     const [getBackdropToggle , setBackdropToggle] = useState(true);
     setTimeout(()=>{
         setBackdropToggle(false);
-    } , 2000);
+    } , 3000);
 
     return(
         <Fragment>

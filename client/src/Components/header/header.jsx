@@ -3,7 +3,6 @@ import {Route , Switch , withRouter} from 'react-router-dom';
 import HeaderFirst from './header-first';
 import LayoutCenterLast from './Layout-Center-Last';
 import About from '../../Common/about';
-import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Compiled/header.css';
 import {useSelector} from 'react-redux';
@@ -25,8 +24,6 @@ const Header = (props)=>{
             <Switch>
                 <Route path="/about" component={About} />
             </Switch>
-
-            {Selector ? (<ToastContainer />) : null}
         </div>
     );
 }
