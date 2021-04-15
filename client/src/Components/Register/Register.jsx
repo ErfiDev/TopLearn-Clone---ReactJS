@@ -2,9 +2,9 @@ import React,{useState} from 'react';
 import EmailIcon from '@material-ui/icons/Email';
 import Helmet from 'react-helmet';
 import {userRegister} from '../../Services/userService';
+import { toast } from 'react-toastify';
 
 import "./register.css";
-import { toast } from 'react-toastify';
 
 const Register = ()=>{
 
