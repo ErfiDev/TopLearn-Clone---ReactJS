@@ -4,42 +4,39 @@ const {
     createCourseValidation,
     createCategoryValidation ,
     getCourseValidation,
-    getCategoriesValidation
+    getCategoriesValidation,
+    filterCoursesValidation
 } = require('../validations/courseValidator');
 
 async function getCourse(req , res)
 {
-    const {count , from} = req.params;
-    const {error} = await getCourseValidation(req.params);
-    if(error)
+    let {count , from} = req.params;
+    if(!count && !from)
     {
-        let {details} = error;
-        details.forEach(item => errors.push(item.message));
-        return res.json({status: 406 , msg: errors});
+        return res.json({
+            msg: 'Enter at least one item',
+            status: 406
+        })
     }
-    else
-    {
-        if(count && !from)
+    else{
+        let errors = [];
+        const {error} = await getCourseValidation(req.params);
+        if(error)
         {
-            let find = await CourseModel.find({}).limit(parseInt(count));
-            return res.json({status: 200 , data: find});
+            let {details} = error;
+            details.forEach(item => errors.push(item.message));
+            return res.json({status: 406 , msg: errors});
         }
-        if(count && from)
-        {   
-            let all = [];
-            let findAll = await CourseModel.find({},{courseCategory: 1,uuid: 1,_id: 0});
-            
-            findAll.forEach(item => {
-                if(item.courseCategory.includes(from))
-                {
-                    return all.push(item.uuid);
-                }else null
-            });
-
-            if(all.length <= 0){
-                return res.json({msg: 'Category not found!' , status: 400});
+        else
+        {
+            if(count && !from)
+            {
+                let find = await CourseModel.find({}).limit(parseInt(count));
+                return res.json({status: 200 , data: find});
             }
-            let find = await CourseModel.find({uuid: {$in : all}}).limit(parseInt(count));
+
+            let find = await CourseModel.find()
+            .limit(parseInt(count)).skip(parseInt(from));
             return res.json({status: 200 , data: find});
         }
     }
@@ -79,6 +76,124 @@ async function postCourse(req , res)
         await data.save()
         .then(()=> res.json({status: 201}))
         .catch(err => res.json({status: 500 , msg: err}));
+    }
+}
+
+async function filterCourses(req , res)
+{
+    let {category} = req.params;
+    let {price} = req.query;
+    if(!category && !price)
+    {
+        return res.json({
+            msg: 'Enter at least one item',
+            status: 406
+        });
+    }
+    else{
+        let defaultPriceOption = ['lowPrice' , 'highPrice'];
+        let errors = [];
+        let {error} = filterCoursesValidation({category,price});
+        if(error)
+        {
+            let {details} = error;
+            details.forEach(item => errors.push(item.message));
+            return res.json({status: 406 , msg: errors});
+        }
+        if(category && !price)
+        {
+            let all = [];
+            let findAll = await CourseModel.find(
+                {},{courseCategory: 1,uuid: 1,_id: 0}
+            );  
+            findAll.forEach(item => {
+                if(item.courseCategory.includes(category))
+                {
+                    return all.push(item.uuid);
+                }else null
+            });
+
+            if(all.length <= 0){
+                return res.json({
+                    msg: 'No courses were found for this category' ,
+                    status: 404
+                });
+            }
+            let findByUuids = await CourseModel.find({
+                uuid: {$in: all}
+            });
+            return res.json({
+                data: findByUuids,
+                status: 200
+            })
+        }
+        if(price && !category)
+        {
+            if(!defaultPriceOption.includes(price))
+            {
+                return res.json({
+                    msg: 'Not defined this price type',
+                    status: 406
+                });
+            }
+            if(price === 'lowPrice')
+            {
+                let findLowPrice = await CourseModel.find({}).sort({price: 1});
+                return res.json({
+                    data: findLowPrice,
+                    status: 200
+                })
+            }
+            let findHighPrice = await CourseModel.find({}).sort({price: -1});
+            res.json({
+                data: findHighPrice,
+                status: 200
+            })
+        }
+        if(price && category)
+        {
+            let all = [];
+            let findAll = await CourseModel.find({},{courseCategory: 1,uuid: 1,_id: 0});  
+            findAll.forEach(item => {
+                if(item.courseCategory.includes(category))
+                {
+                    return all.push(item.uuid);
+                }else null
+            });
+
+            if(all.length <= 0){
+                return res.json({
+                    msg: 'No courses were found for this category' ,
+                    status: 404
+                });
+            }
+            if(!defaultPriceOption.includes(price))
+            {
+                return res.json({
+                    msg: 'Not defined this price type',
+                    status: 406
+                })
+            }
+            else{
+                if(price === 'lowPrice')
+                {
+                    let find = await CourseModel.find({
+                        uuid: {$in: all}
+                    }).sort({price: 1});
+                    return res.json({
+                        data: find,
+                        status: 200
+                    });
+                }
+                let find = await CourseModel.find({
+                    uuid: {$in: all}
+                }).sort({price: -1});
+                res.json({
+                    data: find,
+                    status: 200
+                });
+            }
+        }
     }
 }
 
@@ -209,5 +324,6 @@ module.exports = {
     deleteCourse,
     deleteCategory,
     getCourse,
-    getCategories
+    getCategories,
+    filterCourses
 }

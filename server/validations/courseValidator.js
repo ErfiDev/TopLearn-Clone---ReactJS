@@ -26,6 +26,16 @@ function getCourseValidation(data)
     return getSchema.validate(data);
 }
 
+function filterCoursesValidation(data)
+{
+    const filterSchema = joi.object({
+        price: joi.string(),
+        category: joi.string().case('lower')
+    });
+
+    return filterSchema.validate(data);
+}
+
 function getCategoriesValidation(data)
 {
     const getSchema = joi.object({
@@ -49,5 +59,6 @@ module.exports = {
     createCourseValidation,
     createCategoryValidation,
     getCourseValidation,
-    getCategoriesValidation
+    getCategoriesValidation,
+    filterCoursesValidation
 }

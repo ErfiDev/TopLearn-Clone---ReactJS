@@ -5,17 +5,20 @@ const {
   deleteCourse,
   deleteCategory,
   getCourse,
-  getCategories
+  getCategories,
+  filterCourses
 } = require("../Controllers/courseController");
 
 //course api
-route.get('/courses/:count?/:from?' , getCourse)
+route.get('/courses/:count?/:from?' , getCourse);
+route.get('/filter/courses/:category?' , filterCourses);//With params and query 
 route.post("/create", postCourse);
 route.delete("/delete/:uuid?", deleteCourse);
 
 //category api
-route.get("/categories" , getCategories);
+route.get("/categories" , getCategories);//With req.query
 route.post("/create/category", postCategory);
 route.delete("/delete/category/:title?", deleteCategory);
+
 
 module.exports = route;
