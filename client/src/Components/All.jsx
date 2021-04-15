@@ -1,5 +1,5 @@
 import React from 'react';
-import decoder from '../utils/decoder';
+// import decoder from '../utils/decoder';
 import {connect} from 'react-redux';
 import {Route , Switch} from 'react-router-dom';
 import Header from './header/header';
@@ -11,35 +11,18 @@ import Footer from './Footer/Footer';
 import Register from './Register/Register';
 import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
-import {createUser, deleteUser} from '../Action/userAction';
-import {toast} from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 
 class All extends React.PureComponent
 {
-
     componentDidMount()
     {
         const Token = localStorage.getItem("token");
-        const {dispatch} = this.props;
         if(Token)
         {
-            const Decode = decoder(Token);
-            const DateNow = Date.now() / 1000;
-            if(Decode.payload.exp < DateNow)
-            {
-                localStorage.removeItem("token");
-                dispatch(deleteUser());
-            }
-            else{
-                dispatch(createUser(Decode.payload.user));
-                setTimeout(()=> {
-                    toast.success(`welcome back ${this.props.State.User.fullname}` , {
-                        position: "top-center",
-                        closeOnClick: true
-                    });
-                } , 3000);
-            }
+            let dateNow = Date.now();
+            console.log(dateNow);
         }
     }
 
@@ -61,7 +44,6 @@ class All extends React.PureComponent
                     </Switch>
                 </div>
                 <Footer /> 
-
                 <ToastContainer />
             </div>
         );

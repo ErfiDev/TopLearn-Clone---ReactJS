@@ -86,7 +86,7 @@ async function loginUser(req , res)
         }
         
         let token = await jwt.sign({data: findByEmail} , process.env.ACCESS_TOKEN_SECRET);
-        res.json({
+        return res.json({
             token,
             status: 200
         });

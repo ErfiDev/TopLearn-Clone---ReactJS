@@ -1,30 +1,67 @@
-import React from 'react';
-import {withRouter , Link} from 'react-router-dom';
+import React,{useState} from 'react';
+import {Link} from 'react-router-dom';
 import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
 import Checkbox from '@material-ui/core/Checkbox';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Helmet from 'react-helmet';
-import {useDispatch , useSelector} from 'react-redux';
-import {emailLogin , passLogin , LoginSend} from '../../Action/LoginAction';
+import {userLogin} from '../../Services/userService';
+import Decoder from '../../utils/decoder.js';
+import {createUser} from '../../Action/userAction';
+import {useDispatch} from 'react-redux';
 
 import "./login.css";
+import { toast } from 'react-toastify';
 
 const Login = ()=>{
-
-    const email = useSelector(state => state.emailLogin);
-    const pass = useSelector(state => state.passLogin);
     const dis = useDispatch();
+    const [data , setData] = useState({
+        email: '',
+        pass: ''
+    });
+
+    async function handleSubmit(e)
+    {
+        e.preventDefault();
+        try{
+            let user = {
+                email: data.email,
+                password: data.pass
+            };
+
+            let {data: response} = await userLogin(user);
+            let {status , msg , token} = response;
+            //Checking errors
+            if(msg){
+                return toast.error(msg , {
+                    position: 'bottom-left',
+                    closeOnClick: true
+                });
+            }
+            //Success
+            if(status === 200){
+                let {payload} = Decoder(token);
+                let {data} = payload;
+                localStorage.setItem('token' , token);
+                dis(createUser(data));
+
+                return toast.success(`welcome back ${data.fullname}`,{
+                    position: 'bottom-left',
+                    closeOnClick: true
+                });
+            }
+        }
+        catch(err){console.log(err)}
+    }
 
     return(
         <div className="login-div">
-
             <Helmet>
                 <title>Toplearn / Login</title>
             </Helmet>
 
             <h2 className="login-title">ورود به سایت</h2>
-            <form onSubmit={e => dis(LoginSend(e))}>
+            <form onSubmit={e => handleSubmit(e)}>
 
                 <div id="user-div" className="input-div">
                     <input 
@@ -33,8 +70,8 @@ const Login = ()=>{
                         autoFocus 
                         autoComplete="off" 
                         placeholder="ایمیل" 
-                        value={email}
-                        onChange={(e)=> dis(emailLogin(e))}
+                        value={data.email}
+                        onChange={(e)=> setData({...data, email: e.target.value})}
                     />
                     <span className="span-icon">
                         <EmailIcon fontSize='small' color="inherit" />
@@ -46,8 +83,8 @@ const Login = ()=>{
                         type="password" 
                         id="pass-input"
                         placeholder="رمز عبور" 
-                        value={pass}
-                        onChange={e => dis(passLogin(e))}
+                        value={data.pass}
+                        onChange={(e)=> setData({...data, pass: e.target.value})}
                         minLength="8"
                     />
                     <span className="span-icon">
@@ -88,4 +125,4 @@ const Login = ()=>{
     );
 };
 
-export default withRouter(Login);
+export default Login;

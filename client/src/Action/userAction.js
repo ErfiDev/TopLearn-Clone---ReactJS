@@ -1,8 +1,10 @@
 import {toast} from 'react-toastify';
+let login = 'CREATE_USER';
+let logout = 'DELETE_USER';
 
 export const createUser = user=>{
     return async dispatch =>{
-        await dispatch({type: "CREATE_USER" , payload: user});
+        await dispatch({type: login , payload: user});
     }
 }
 
@@ -13,6 +15,6 @@ export const deleteUser = ()=>{
             closeOnClick: true
         });
         localStorage.removeItem("token");
-        await dispatch({type: "DELETE_USER" , payload: {}});
+        await dispatch({type: logout});
     }
 }

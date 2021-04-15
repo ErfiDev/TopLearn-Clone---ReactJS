@@ -1,17 +1,13 @@
 import React from 'react';
-import {Link , withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Menu from './menu';
 import MenuIcon from '@material-ui/icons/Menu';
-
 
 class HeaderFirst extends React.Component
 {
 
     render() 
     {
-        let {location} = this.props;
-        let {pathname} = location; 
-
         return(
             <div className="header-first">
                 <div className="left-menu">
@@ -23,8 +19,8 @@ class HeaderFirst extends React.Component
                 <div className="right-menu">
                     <div className="header-li-container">
                         <ul id="ul-header">
-                            <li className={pathname === "/about" ? "selected-category" : ""}>
-                                <Link to="/about">
+                            <li>
+                                <Link>
                                 درباره ما
                                 </Link>
                             </li>
@@ -88,4 +84,4 @@ class HeaderFirst extends React.Component
     }
 }
 
-export default withRouter(HeaderFirst);
+export default HeaderFirst;
