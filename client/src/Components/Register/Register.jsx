@@ -1,27 +1,58 @@
-import React from 'react';
-import {withRouter} from 'react-router';
+import React,{useState} from 'react';
 import EmailIcon from '@material-ui/icons/Email';
-import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
-import {useSelector , useDispatch} from 'react-redux';
-import {emailRegis,familyRegis,fullnameRegis,nameRegis,pass1Regis,pass2Regis,RegisterSend} from '../../Action/RegisterAction';
+import {userRegister} from '../../Services/userService';
 
 import "./register.css";
+import { toast } from 'react-toastify';
 
-const Register = ({history})=>{
+const Register = ()=>{
 
-    const name = useSelector(state => state.nameRegis);
-    const fullname = useSelector(state => state.fullnameRegis);
-    const family = useSelector(state => state.familyRegis);
-    const email = useSelector(state => state.emailRegis);
-    const pass1 = useSelector(state => state.pass1Regis);
-    const pass2 = useSelector(state => state.pass2Regis);
-    const Init = useSelector(state => state.Register);
+    const [data , setData] = useState({
+        name: '',
+        email: '',
+        fullname: '',
+        pass1: '',
+        pass2: ''
+    });
 
-    const dis = useDispatch();
-    if(Init === "please login")
+    async function handleSubmit(e){
+        e.preventDefault();
+        try{
+            let user = {
+                fullname: data.fullname,
+                password: data.pass1,
+                password2: data.pass2,
+                email: data.email
+            };
+
+            let {data: response} = await userRegister(user);
+            let {status , msg} = response;
+            if(msg){
+                return toast.error(msg , {
+                    position: 'bottom-left',
+                    closeOnClick: true
+                })
+            }
+            if(status === 201){
+                clearInputs();
+                return toast.success('user created! please login' , {
+                    position: 'bottom-left',
+                    closeOnClick: true
+                })
+            }
+        }catch(err){console.log(err)}
+    }
+
+    function clearInputs()
     {
-        history.push("/login");
+        setData({
+            name: '',
+            fullname: '',
+            email: '',
+            pass1: '',
+            pass2: ''
+        })
     }
 
     return(
@@ -30,35 +61,22 @@ const Register = ({history})=>{
                 <title>Toplearn / Register</title>
             </Helmet>
 
-            <form onSubmit={e => dis(RegisterSend(e))}>
+            <form onSubmit={e => handleSubmit(e)}>
                 <div className="form-row">
-                    <div className="col-md-4 mb-3">
+                    <div className="col-sm">
                         <label for="validationDefault01">First name</label>
                         <input 
                             type="text" 
                             className="form-control" 
                             id="validationDefault01" 
-                            placeholder="First name" 
-                            value={name}
-                            onChange={e => dis(nameRegis(e))}
+                            placeholder="First name"
+                            onChange={e => setData({...data , name: e.target.value})} 
+                            value={data.name}
                             required 
                         />
                     </div>
 
-                    <div className="col-md-4 mb-3">
-                        <label for="validationDefault02">Last name</label>
-                        <input 
-                            type="text" 
-                            className="form-control" 
-                            id="validationDefault02" 
-                            placeholder="Last name" 
-                            value={family}
-                            onChange={e => dis(familyRegis(e))}
-                            required 
-                        />
-                    </div>
-
-                    <div className="col-md-4 mb-3">
+                    <div className="col-sm">
                         <label for="validationDefaultUsername">Email</label>
 
                         <div className="input-group">
@@ -73,8 +91,8 @@ const Register = ({history})=>{
                                 id="validationDefaultUsername" 
                                 placeholder="Username" 
                                 aria-describedby="inputGroupPrepend2" 
-                                value={email}
-                                onChange={e => dis(emailRegis(e))}
+                                value={data.email}
+                                onChange={e => setData({...data , email: e.target.value})} 
                                 required 
                             />
                         </div>
@@ -82,15 +100,15 @@ const Register = ({history})=>{
                 </div>
 
                 <div className="form-row">
-                    <div className="w-100" style={{marginBottom: "15px"}}>
+                    <div className="w-100" style={{marginBottom: "15px",marginTop: "15px"}}>
                         <label for="validationDefault01">Full Name</label>
                         <input 
                             type="text" 
                             className="form-control" 
                             id="validationDefault01" 
                             placeholder="Full name" 
-                            value={fullname}
-                            onChange={e => dis(fullnameRegis(e))}
+                            value={data.fullname}
+                            onChange={e => setData({...data , fullname: e.target.value})} 
                             required 
                             minLength="5"
                         />
@@ -105,8 +123,8 @@ const Register = ({history})=>{
                             className="form-control" 
                             id="validationDefault01" 
                             placeholder="Password" 
-                            value={pass1}
-                            onChange={e => dis(pass1Regis(e))}
+                            value={data.pass1}
+                            onChange={e => setData({...data , pass1: e.target.value})} 
                             required 
                             minLength="8"
                         />
@@ -118,8 +136,8 @@ const Register = ({history})=>{
                             className="form-control" 
                             id="validationDefault01" 
                             placeholder="Password again" 
-                            value={pass2}
-                            onChange={e => dis(pass2Regis(e))}
+                            value={data.pass2}
+                            onChange={e => setData({...data , pass2: e.target.value})} 
                             required 
                             minLength="8"
                         />
@@ -136,10 +154,8 @@ const Register = ({history})=>{
                 </div>
                 <button className="btn btn-primary" type="submit">Submit form</button>
             </form>
-
-            <ToastContainer />
         </div>
     );
 };
 
-export default withRouter(Register);
+export default Register;

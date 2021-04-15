@@ -1,4 +1,12 @@
 {
-    "toplearnapi": "https://toplearnapi.ghorbany.dev",
-    "localserver": "localhost:3001"
+    "registerUser": "http://localhost:4000/api/user/register",
+    "loginUser": "http://localhost:4000/api/user/login",
+    "logoutUser": "http://localhost:4000/api/user/logout",
+    "getCourses": "http://localhost:4000/api/course/courses",
+    "filterCourses": "http://localhost:4000/api/course/filter/courses",
+    "createCourse": "http://localhost:4000/api/course/create",
+    "deleteCourse": "http://localhost:4000/api/course/delete",
+    "getCategories": "http://localhost:4000/api/course/categories",
+    "createCategory": "http://localhost:4000/api/course/create/category",
+    "deleteCategory": "http://localhost:4000/api/course/delete/category"
 }
