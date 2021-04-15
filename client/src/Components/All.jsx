@@ -1,5 +1,5 @@
 import React from 'react';
-// import decoder from '../utils/decoder';
+import decoder from '../utils/decoder';
 import {connect} from 'react-redux';
 import {Route , Switch} from 'react-router-dom';
 import Header from './header/header';
@@ -11,6 +11,7 @@ import Footer from './Footer/Footer';
 import Register from './Register/Register';
 import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
+import {createUser} from '../Action/userAction';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,11 +19,17 @@ class All extends React.PureComponent
 {
     componentDidMount()
     {
+        let {dispatch} = this.props;
         const Token = localStorage.getItem("token");
         if(Token)
         {
-            let dateNow = Date.now();
-            console.log(dateNow);
+            let {data , exp} = decoder(Token).payload;
+            let currentTime = Date.now();
+            if(currentTime < exp){
+                return dispatch(createUser(data));
+            }else{
+                localStorage.removeItem('token');
+            }
         }
     }
 

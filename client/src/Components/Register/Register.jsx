@@ -29,10 +29,12 @@ const Register = ()=>{
             let {data: response} = await userRegister(user);
             let {status , msg} = response;
             if(msg){
-                return toast.error(msg , {
-                    position: 'bottom-left',
-                    closeOnClick: true
-                })
+                msg.map(item => {
+                    return toast.error(item , {
+                        position: 'bottom-left',
+                        closeOnClick: true
+                    })
+                });
             }
             if(status === 201){
                 clearInputs();

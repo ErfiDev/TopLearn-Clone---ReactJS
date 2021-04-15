@@ -1,20 +1,16 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link , withRouter} from 'react-router-dom';
 import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
 import Checkbox from '@material-ui/core/Checkbox';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Helmet from 'react-helmet';
 import {userLogin} from '../../Services/userService';
-import Decoder from '../../utils/decoder.js';
-import {createUser} from '../../Action/userAction';
-import {useDispatch} from 'react-redux';
 
 import "./login.css";
 import { toast } from 'react-toastify';
 
-const Login = ()=>{
-    const dis = useDispatch();
+const Login = ({history})=>{
     const [data , setData] = useState({
         email: '',
         pass: ''
@@ -33,22 +29,18 @@ const Login = ()=>{
             let {status , msg , token} = response;
             //Checking errors
             if(msg){
-                return toast.error(msg , {
-                    position: 'bottom-left',
-                    closeOnClick: true
-                });
+                msg.map(item => {
+                    return toast.error(item , {
+                        position: 'bottom-left',
+                        closeOnClick: true
+                    });
+                })
             }
             //Success
             if(status === 200){
-                let {payload} = Decoder(token);
-                let {data} = payload;
                 localStorage.setItem('token' , token);
-                dis(createUser(data));
-
-                return toast.success(`welcome back ${data.fullname}`,{
-                    position: 'bottom-left',
-                    closeOnClick: true
-                });
+                history.replace('/');
+                window.location.reload();
             }
         }
         catch(err){console.log(err)}
@@ -65,7 +57,7 @@ const Login = ()=>{
 
                 <div id="user-div" className="input-div">
                     <input 
-                        type="email" 
+                        type="text" 
                         id="username-input" 
                         autoFocus 
                         autoComplete="off" 
@@ -125,4 +117,4 @@ const Login = ()=>{
     );
 };
 
-export default Login;
+export default withRouter(Login);

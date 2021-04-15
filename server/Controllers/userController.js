@@ -22,9 +22,9 @@ async function registerUser(req , res)
     let find = await UserModel.find({email});
     if(find.length > 0)
     {
-        errors.push({msg: 'this username/email has been used'});
+        errors.push('this username/email has been used');
         return res.json({
-            msg: 'this username/email has been used',
+            msg: errors,
             status: 401
         })
     }
@@ -32,9 +32,9 @@ async function registerUser(req , res)
         //Check password match
         if(password !== password2)
         {
-            errors.push({msg: 'Passwords do not match'});
+            errors.push('Passwords do not match');
             return res.json({
-                msg: 'Passwords do not match',
+                msg: errors,
                 status: 406
             });
         }
@@ -79,21 +79,30 @@ async function loginUser(req , res)
         let ComparingPass = await bcrypt.compare(password , findByEmail.password);
         if(!ComparingPass)
         {
+            errors.push('Passwords do not match');
             return res.json({
-                msg: 'Passwords do not match',
+                msg: errors,
                 status: 406
             });
         }
         
-        let token = await jwt.sign({data: findByEmail} , process.env.ACCESS_TOKEN_SECRET);
+        const today = new Date()
+        const tomorrow = new Date(today)
+        let exp = tomorrow.setDate(tomorrow.getDate() + 1);
+
+        let token = await jwt.sign(
+            {data: findByEmail , exp} ,
+            process.env.ACCESS_TOKEN_SECRET
+        );
         return res.json({
             token,
             status: 200
         });
     }
     else{
+        errors.push('This user not fund please sign up');
         res.json({
-            msg: 'This user not fund please sign up',
+            msg: errors,
             status: 404
         });
     }
