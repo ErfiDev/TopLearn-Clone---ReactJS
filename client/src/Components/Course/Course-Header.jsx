@@ -1,11 +1,11 @@
 import React from 'react';
-import {Link} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 import ArrowLeft from '@material-ui/icons/KeyboardArrowLeftOutlined';
 
 const CourseHeader = () => {
     return (  
         <div className="course-title-container">
-            <Link>
+            <Link to="/filterCourse">
                 <ArrowLeft style={{color: "rgb(0, 110, 255)"}}/>
                 مشاهده همه دوره ها
             </Link>

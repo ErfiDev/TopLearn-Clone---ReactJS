@@ -8,6 +8,13 @@ $bc: "background-color";
     justify-content: $justifyContent;
 }
 
+@mixin grid($columns , $rows)
+{
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+}
+
 
 .course-container{
     width: 100%;
@@ -68,6 +75,44 @@ $bc: "background-color";
         height: auto;
         @include Flex(row , flex-start , space-around);
         flex-wrap: wrap;
+    }
+
+    .filter-courses-list{
+        width: 98%;
+        min-height: 250px;
+        height: auto;
+        @include Flex(row,flex-start,center);
+        flex-wrap: wrap;
+
+        .filter-search-box{
+            width: 100%;
+            min-height: 80px;
+            height: auto;
+            @include grid(1fr 1fr,1fr);
+            -webkit-box-shadow: 0 7px 10px -10px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 7px 10px -10px rgba(0, 0, 0, 0.35);
+            .by-price{
+                @include Flex(row,center,flex-start);
+                padding-left: 2vw;
+            }
+            .by-search{
+                @include Flex(row,center,space-around);
+            }
+        }
+
+        .course-filterd-container{
+            width: 70%;
+            min-height: 500px;
+            height: auto;
+            #{$bc}: red;
+        }
+
+        .filter-option-container{
+            width: 30%;
+            min-height: 500px;
+            height: auto;
+            #{$bc}: blue;
+        }
     }
 }
 

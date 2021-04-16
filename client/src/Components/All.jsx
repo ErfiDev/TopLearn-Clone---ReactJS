@@ -5,7 +5,8 @@ import {Route , Switch} from 'react-router-dom';
 import Header from './header/header';
 import Nav from './NavBar/nav';
 import Ads from './Ads/ads';
-import Course from './Course/Course';
+import HomeCourse from './Course/home.layout';
+import FilterCourse from './Course/filter.layout';
 import Login from './Login/Login';
 import Footer from './Footer/Footer';
 import Register from './Register/Register';
@@ -47,7 +48,8 @@ class All extends React.PureComponent
                     <Switch>
                         <Route path="/login" component={Login} />
                         <Route path="/register" component={Register} /> 
-                        <Route path="/" exact component={Course} />
+                        <Route path="/filterCourse" component={FilterCourse} /> 
+                        <Route path="/" exact component={HomeCourse} />
                     </Switch>
                 </div>
                 <Footer /> 

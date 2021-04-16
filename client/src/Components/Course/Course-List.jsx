@@ -9,8 +9,8 @@ const CourseList = () => {
     return (  
         <div className="course-list">
             
-            {Selector.map(item => (
-                <DivCourseList 
+            {Selector.map(item=>{
+                return <DivCourseList 
                     imgSrc={item.imgSrc}
                     title={item.title}
                     key={item.uuid}
@@ -18,7 +18,7 @@ const CourseList = () => {
                     teacher={item.teacher}
                     price={item.price}
                 />
-            ))}
+            })}
 
         </div>
     );

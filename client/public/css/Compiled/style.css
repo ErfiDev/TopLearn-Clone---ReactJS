@@ -5,7 +5,7 @@
 }
 
 .route-div {
-  min-height: 500px;
+  min-height: 300px;
   height: auto;
   display: flex;
   align-items: center;

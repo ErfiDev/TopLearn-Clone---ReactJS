@@ -552,6 +552,51 @@
   justify-content: space-around;
   flex-wrap: wrap;
 }
+.course-container .filter-courses-list {
+  width: 98%;
+  min-height: 250px;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.course-container .filter-courses-list .filter-search-box {
+  width: 100%;
+  min-height: 80px;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  -webkit-box-shadow: 0 7px 10px -10px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 7px 10px -10px rgba(0, 0, 0, 0.35);
+}
+.course-container .filter-courses-list .filter-search-box .by-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2vw;
+}
+.course-container .filter-courses-list .filter-search-box .by-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.course-container .filter-courses-list .course-filterd-container {
+  width: 70%;
+  min-height: 500px;
+  height: auto;
+  background-color: red;
+}
+.course-container .filter-courses-list .filter-option-container {
+  width: 30%;
+  min-height: 500px;
+  height: auto;
+  background-color: blue;
+}
 
 .course-div {
   width: 23%;
