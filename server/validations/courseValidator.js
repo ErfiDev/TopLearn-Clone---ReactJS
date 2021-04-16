@@ -26,6 +26,15 @@ function getCourseValidation(data)
     return getSchema.validate(data);
 }
 
+function getCourseWithTitleValidation(data)
+{
+    const schema = joi.object({
+        title: joi.string().required().alphanum()
+    });
+
+    return schema.validate(data);
+}
+
 function filterCoursesValidation(data)
 {
     const filterSchema = joi.object({
@@ -60,5 +69,6 @@ module.exports = {
     createCategoryValidation,
     getCourseValidation,
     getCategoriesValidation,
-    filterCoursesValidation
+    filterCoursesValidation,
+    getCourseWithTitleValidation
 }

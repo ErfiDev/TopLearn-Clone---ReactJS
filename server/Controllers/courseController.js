@@ -5,7 +5,8 @@ const {
     createCategoryValidation ,
     getCourseValidation,
     getCategoriesValidation,
-    filterCoursesValidation
+    filterCoursesValidation,
+    getCourseWithTitleValidation
 } = require('../validations/courseValidator');
 
 async function getCourse(req , res)
@@ -197,6 +198,29 @@ async function filterCourses(req , res)
     }
 }
 
+async function getCourseWithTitle(req , res)
+{
+    let errors = [];
+    let {error} = await getCourseWithTitleValidation(req.params);
+    if(error){
+        let {details} = error;
+        details.forEach(item => errors.push(item.message));
+        return res.json({
+            msg: errors,
+            status: 406
+        });
+    }
+    
+    let {title} = req.params;
+    let findByTitle = await CourseModel.find(
+        {title : {$regex : `.*${title}.*` , $options: 'i'}}
+    );
+    res.json({
+        data: findByTitle,
+        status: 200
+    });
+}
+
 async function getCategories(req , res)
 {
     if(req.url === '/categories')
@@ -325,5 +349,6 @@ module.exports = {
     deleteCategory,
     getCourse,
     getCategories,
-    filterCourses
+    filterCourses,
+    getCourseWithTitle
 }

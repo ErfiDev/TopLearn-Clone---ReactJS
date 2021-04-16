@@ -6,12 +6,14 @@ const {
   deleteCategory,
   getCourse,
   getCategories,
-  filterCourses
+  filterCourses,
+  getCourseWithTitle
 } = require("../Controllers/courseController");
 
 //course api
 route.get('/courses/:count?/:from?' , getCourse);
 route.get('/filter/courses/:category?' , filterCourses);//With params and query 
+route.get('/filter/:title?' , getCourseWithTitle);
 route.post("/create", postCourse);
 route.delete("/delete/:uuid?", deleteCourse);
 
