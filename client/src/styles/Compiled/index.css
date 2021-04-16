@@ -589,13 +589,23 @@
   width: 70%;
   min-height: 500px;
   height: auto;
-  background-color: red;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 .course-container .filter-courses-list .filter-option-container {
   width: 30%;
   min-height: 500px;
   height: auto;
-  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  padding: 5vw;
 }
 
 .course-div {
@@ -697,6 +707,11 @@
 }
 .course-div .course-time-container .course-price {
   color: #6FC38B;
+}
+
+.in-filter {
+  width: 350px;
+  margin: 20px 15px 15px 15px;
 }
 
 @media only screen and (max-width: 1020px) {

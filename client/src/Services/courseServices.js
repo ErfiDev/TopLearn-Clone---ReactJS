@@ -14,8 +14,18 @@ export function getCourse(count, from) {
   return httpService.get(`${getCourses}/${count}/${from}`);
 }
 
-export function filterCourse(category, filter) {
-  return httpService.get(`${filterCourses}/${category}?price=${filter}`);
+export function filterCourse(category, price) {
+  if(category && !price){
+    return httpService.get(`${filterCourses}/${category}`);
+  }
+  if(!category && price){
+    return httpService.get(`${filterCourses}?price=${price}`);
+  }
+  if(category && price)
+  {
+    return httpService.get(`${filterCourses}/${category}?price=${price}`);
+  }
+  httpService.get(`${filterCourses}`);
 }
 
 export function postCourse(data) {
@@ -28,9 +38,12 @@ export function deleteCours(uuid) {
 
 export function getCatagory(count , from)
 {
-    return httpService.get(
-        `${getCategories}?count=${count}&from=${from}`
-    );
+    if(!count && !from) return httpService.get(getCategories)
+    else{
+      return httpService.get(
+          `${getCategories}?count=${count}&from=${from}`
+      );
+    }
 }
 
 export function createCategoryy(data)

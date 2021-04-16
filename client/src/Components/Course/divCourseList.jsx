@@ -3,9 +3,9 @@ import CommentIcon from '@material-ui/icons/ModeComment';
 import PersonIcon from '@material-ui/icons/Person';
 import Timer from '@material-ui/icons/Timer';
 
-const DivCourseList = ({imgSrc,title,teacher,price,courseTime,key}) => {
+const DivCourseList = ({imgSrc,title,teacher,price,courseTime,key,className}) => {
     return (  
-        <div className="course-div" key={key}>
+        <div className={className} key={key}>
                 <div className="course-img-container">
                     <img src={imgSrc} alt="course" />
                 </div>

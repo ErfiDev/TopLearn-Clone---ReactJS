@@ -226,7 +226,10 @@ async function getCategories(req , res)
     if(req.url === '/categories')
     {
         let findAll = await CategoryModel.find();
-        return res.json(findAll);
+        return res.json({
+            data: findAll,
+            status: 200
+        });
     }
     else{
         let errors = [];

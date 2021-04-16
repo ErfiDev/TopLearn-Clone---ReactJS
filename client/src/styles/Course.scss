@@ -104,14 +104,19 @@ $bc: "background-color";
             width: 70%;
             min-height: 500px;
             height: auto;
-            #{$bc}: red;
+            // #{$bc}: red;
+            @include Flex(row,flex-start,space-around);
+            flex-wrap: wrap;
         }
 
         .filter-option-container{
             width: 30%;
             min-height: 500px;
             height: auto;
-            #{$bc}: blue;
+            @include Flex(column,center,flex-start);
+            font-family: 'Poppins' , sans-serif;
+            font-size: 1.5rem;
+            padding: 5vw;
         }
     }
 }
@@ -218,6 +223,11 @@ $bc: "background-color";
             color: #6FC38B;
         }
     }
+}
+
+.in-filter{
+    width: 350px;
+    margin: 20px 15px 15px 15px;
 }
 
 

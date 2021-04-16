@@ -17,6 +17,7 @@ const CourseList = () => {
                     courseTime={item.courseTime}
                     teacher={item.teacher}
                     price={item.price}
+                    className="course-div"
                 />
             })}
 

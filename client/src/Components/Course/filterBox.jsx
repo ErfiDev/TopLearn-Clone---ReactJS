@@ -1,6 +1,8 @@
 import React from 'react';
 import { FormControl, InputLabel, makeStyles, MenuItem, Select,Button} from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import {useDispatch} from 'react-redux';
+import FilterAction from '../../Action/filterCourses';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -19,6 +21,14 @@ const useStyles = makeStyles((theme) => ({
 
 const FilterBox = () => {
     const classes = useStyles();
+    const dis = useDispatch();
+
+    function applyPriceFilter()
+    {
+        let findInput = document.querySelector('.MuiSelect-nativeInput');
+        if(!findInput.value) return null
+        dis(FilterAction(null , findInput.value , null));
+    }
     
     return ( 
         <div className="by-price">
@@ -28,11 +38,11 @@ const FilterBox = () => {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     >
-                    <MenuItem value={10}>The highest price</MenuItem>
-                    <MenuItem value={20}>lowest price</MenuItem>
+                    <MenuItem value="highPrice">Sort by the most expensive price</MenuItem>
+                    <MenuItem value="lowPrice">Sort by cheapest price</MenuItem>
                 </Select>
             </FormControl>
-            <Button variant='contained' color='primary'>
+            <Button onClick={applyPriceFilter} variant='contained' color='primary'>
                 <FilterListIcon />
             </Button> 
         </div>
