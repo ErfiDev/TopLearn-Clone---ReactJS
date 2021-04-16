@@ -6,7 +6,8 @@ import {
   deleteCourse,
   getCategories,
   createCategory,
-  deleteCategory
+  deleteCategory,
+  getCourseWithTitle
 } from "./config.json";
 
 export function getCourse(count, from) {
@@ -45,4 +46,9 @@ export function deleteCategories(title)
     return httpService.delete(
         `${deleteCategory}/${title}`
     );
+}
+
+export function getWithTitle(title)
+{
+  return httpService.get(`${getCourseWithTitle}/${title}`);
 }
