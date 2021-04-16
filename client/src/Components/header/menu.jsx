@@ -61,7 +61,7 @@ const SimpleMenu = ()=> {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose}>
-            <Link to="/">Setting</Link>
+            <Link to="/dashboard">Dashboard</Link>
           </MenuItem>
           <MenuItem onClick={handleClose}>
             <Link onClick={()=> dis(deleteUser())} to="/">Logout</Link>
