@@ -33,7 +33,7 @@ export function postCourse(data) {
 }
 
 export function deleteCours(uuid) {
-  return httpService.post(`${deleteCourse}/${uuid}`);
+  return httpService.delete(`${deleteCourse}/${uuid}`);
 }
 
 export function getCatagory(count , from)
