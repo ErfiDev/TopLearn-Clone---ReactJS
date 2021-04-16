@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 
 const CourseList = () => {
 
-    const Selector = useSelector(state => state.course);
+    const Selector = useSelector(state => state.courses);
 
     return (  
         <div className="course-list">
@@ -12,7 +12,11 @@ const CourseList = () => {
             {Selector.map(item => (
                 <DivCourseList 
                     imgSrc={item.imgSrc}
-                    courseTitle={item.title}
+                    title={item.title}
+                    key={item.uuid}
+                    courseTime={item.courseTime}
+                    teacher={item.teacher}
+                    price={item.price}
                 />
             ))}
 

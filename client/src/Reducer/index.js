@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import courseMakerReducer from './courseMakerReducer';
+import courses from './course';
 import User from './user';
 
 const Reducers = combineReducers({
-    course: courseMakerReducer,
+    courses,
     User
 });
 

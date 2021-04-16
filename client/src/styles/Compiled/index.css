@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -499,8 +498,9 @@
   width: 80%;
   height: auto;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   font-family: vazir;
   margin-bottom: 30px;
 }
@@ -545,63 +545,6 @@
 }
 .course-container .course-list {
   width: 89%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-.course-container .papular-course-container {
-  width: 89%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  margin-top: 10vh;
-}
-.course-container .papular-course-container .papular-title {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 5vh;
-}
-.course-container .papular-course-container .papular-title h5 {
-  font-family: vazir;
-  font-weight: 600;
-  position: relative;
-  margin-right: 100px;
-}
-.course-container .papular-course-container .papular-title h5::after {
-  content: "";
-  position: absolute;
-  top: 40%;
-  bottom: 40%;
-  right: -40px;
-  height: 20%;
-  width: 35px;
-  background-color: #00ccff;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-.course-container .papular-course-container .papular-title h5::before {
-  content: "";
-  position: absolute;
-  top: 40%;
-  bottom: 40%;
-  right: -100px;
-  height: 20%;
-  width: 60px;
-  background-color: #bdffff;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-.course-container .papular-course-container .papular-course {
-  width: 100%;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -719,23 +662,6 @@
     width: 48% !important;
     height: 480px !important;
   }
-
-  .papular-course {
-    flex-wrap: wrap !important;
-  }
-  .papular-course .course-div {
-    width: 48% !important;
-    height: 480px !important;
-  }
-  .papular-course .course-div div {
-    width: 100% !important;
-  }
-  .papular-course .course-div .course-time-container {
-    width: 90% !important;
-  }
-  .papular-course .course-div .course-hr {
-    width: 90% !important;
-  }
 }
 @media only screen and (max-width: 720px) {
   .course-list {
@@ -744,23 +670,6 @@
   .course-list .course-div {
     width: 90% !important;
     height: 520px !important;
-  }
-
-  .papular-course {
-    flex-wrap: wrap !important;
-  }
-  .papular-course .course-div {
-    width: 90% !important;
-    height: 520px !important;
-  }
-  .papular-course .course-div div {
-    width: 100% !important;
-  }
-  .papular-course .course-div .course-time-container {
-    width: 90% !important;
-  }
-  .papular-course .course-div .course-hr {
-    width: 90% !important;
   }
 }
 .footer-container {
@@ -1098,9 +1007,8 @@
   padding: 0;
   margin: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   justify-content: flex-end;
+  align-items: center;
 }
 .navbar .left-child-nav .ear-h4-container h4 {
   text-align: center;
@@ -1113,7 +1021,7 @@
 }
 .navbar .left-child-nav .ear-img-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 20%;
   height: 100%;
@@ -1135,8 +1043,8 @@
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
   list-style: none;
   font-family: vazir;
 }
@@ -1149,43 +1057,6 @@
 }
 .navbar .right-child-nav .nav-ul .option-nav:hover {
   color: #796fff;
-}
-
-.drop-down-navbar {
-  position: absolute;
-  top: 53px;
-  right: 0;
-  width: 200px;
-  height: 200px;
-  background-color: red;
-}
-.drop-down-navbar .ul-drop-down {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  background-color: blue;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: center;
-  font-family: vazir;
-  list-style: none;
-  font-size: 12pt;
-}
-.drop-down-navbar .ul-drop-down li {
-  width: 70%;
-  margin-bottom: 10px;
-  direction: rtl;
-  text-align: right;
-}
-.drop-down-navbar .ul-drop-down li::before {
-  content: "•";
-  color: red;
-  font-weight: bold;
-  display: inline-block;
-  width: 1rem;
-  margin-right: -1rem;
 }
 
 @media only screen and (max-width: 1250px) {

@@ -15,22 +15,9 @@ const RightChild = () => {
                     گرافیک
                 </li>
 
-                <li className="option-nav">
-                    امنیت
-                </li>
-
                 <li className="option-nav drop-down-nav">
                     <Arrow />
                     سیستم عامل
-                </li>
-
-                <li className="option-nav">
-                    سئو
-                </li>
-
-                <li className="option-nav drop-down-nav">
-                    <Arrow />
-                    تحت ویندوز
                 </li>
 
                 <li className="option-nav drop-down-nav">

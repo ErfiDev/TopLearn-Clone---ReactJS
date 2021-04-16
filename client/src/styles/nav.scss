@@ -6,14 +6,14 @@ $bc : "background-color";
     margin: 0;
 }
 
-@mixin Flex-center-center{
+@mixin flex($justify , $align){
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: $justify;
+    align-items: $align;
 }
 
 .navbar{
-    @include Flex-center-center();
+    @include flex(space-between , center);
     @include PM();
     width: 100%;
     height: 80px;
@@ -24,16 +24,13 @@ $bc : "background-color";
         @include PM();
         width: 20%;
         height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex(center, center);
 
         .ear-h4-container{
             width: 80%;
             height: 90%;
             @include PM();
-            @include Flex-center-center();
-            justify-content: flex-end;
+            @include flex(flex-end, center);
 
             h4{
                 text-align: center;
@@ -68,9 +65,7 @@ $bc : "background-color";
             @include PM();
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            @include flex(space-around, center);
             list-style: none;
             font-family: vazir;
 
@@ -87,48 +82,6 @@ $bc : "background-color";
         }
     }
 }
-
-
-.drop-down-navbar{
-    position: absolute;
-    top: 53px;
-    right: 0;
-    width: 200px;
-    height: 200px;
-    #{$bc}: red;
-
-    .ul-drop-down{
-        @include PM();
-        width: 100%;
-        height: 100%;
-        #{$bc}: blue;
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        align-items: center;
-        // list-style-type: square;
-        font-family: vazir;
-        list-style: none;
-        font-size: 12pt;
-
-        li{
-            width: 70%;
-            margin-bottom: 10px;
-            direction: rtl;
-            text-align: right;
-            &::before{
-                content: "\2022";
-                color: red;
-                font-weight: bold;
-                display: inline-block;
-                width: 1rem;
-                margin-right: -1rem;
-            }
-        }
-    }
-}
-
-
 
 @media only screen and (max-width: 1250px)
 {
