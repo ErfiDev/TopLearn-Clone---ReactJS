@@ -2,7 +2,6 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 import HeaderFirst from './header-first';
 import LayoutCenterLast from './Layout-Center-Last';
-import './Compiled/header.css';
 
 const Header = (props)=>{
 

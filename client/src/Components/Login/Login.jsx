@@ -6,8 +6,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Helmet from 'react-helmet';
 import {userLogin} from '../../Services/userService';
-
-import "./login.css";
 import { toast } from 'react-toastify';
 
 const Login = ({history})=>{

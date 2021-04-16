@@ -3,7 +3,6 @@ import React from 'react';
 import CourseHeader from './Course-Header';
 import CourseList from './Course-List';
 import PapularCourse from './papularCourse';
-import './Compiled/Course.css';
 
 class Course extends React.Component
 {

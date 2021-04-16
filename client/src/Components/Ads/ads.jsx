@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './Compiled/ads.css';
-
 const Ads = () => {
     return (  
         <div className="ads-container">

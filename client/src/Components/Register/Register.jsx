@@ -4,8 +4,6 @@ import Helmet from 'react-helmet';
 import {userRegister} from '../../Services/userService';
 import { toast } from 'react-toastify';
 
-import "./register.css";
-
 const Register = ()=>{
 
     const [data , setData] = useState({
