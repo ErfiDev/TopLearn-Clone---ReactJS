@@ -17,10 +17,10 @@ Created by erfan hanifezade for testing and learning only
 ## Installation
 ```
 cd server
-npm install --force
+npm install 
 npm run watch
 
 cd client
-npm install --force
+npm install 
 npm start
 ```
