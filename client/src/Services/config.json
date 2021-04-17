@@ -1,14 +1,14 @@
 {
-    "registerUser": "http://localhost:4000/api/user/register",
-    "loginUser": "http://localhost:4000/api/user/login",
-    "logoutUser": "http://localhost:4000/api/user/logout",
-    "getCourses": "http://localhost:4000/api/course/courses",
-    "filterCourses": "http://localhost:4000/api/course/filter/courses",
-    "createCourse": "http://localhost:4000/api/course/create",
-    "deleteCourse": "http://localhost:4000/api/course/delete",
-    "getCategories": "http://localhost:4000/api/course/categories",
-    "createCategory": "http://localhost:4000/api/course/create/category",
-    "deleteCategory": "http://localhost:4000/api/course/delete/category",
-    "getCourseWithTitle": "http://localhost:4000/api/course/filter",
-    "updateUser": "http://localhost:4000/api/user/update/password"
+    "registerUser": "https://danaco-test.herokuapp.com/api/user/register",
+    "loginUser": "https://danaco-test.herokuapp.com/api/user/login",
+    "logoutUser": "https://danaco-test.herokuapp.com/api/user/logout",
+    "getCourses": "https://danaco-test.herokuapp.com/api/course/courses",
+    "filterCourses": "https://danaco-test.herokuapp.com/api/course/filter/courses",
+    "createCourse": "https://danaco-test.herokuapp.com/api/course/create",
+    "deleteCourse": "https://danaco-test.herokuapp.com/api/course/delete",
+    "getCategories": "https://danaco-test.herokuapp.com/api/course/categories",
+    "createCategory": "https://danaco-test.herokuapp.com/api/course/create/category",
+    "deleteCategory": "https://danaco-test.herokuapp.com/api/course/delete/category",
+    "getCourseWithTitle": "https://danaco-test.herokuapp.com/api/course/filter",
+    "updateUser": "https://danaco-test.herokuapp.com/api/user/update/password"
 }
