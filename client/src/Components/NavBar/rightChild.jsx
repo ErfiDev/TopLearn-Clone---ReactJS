@@ -6,31 +6,31 @@ const RightChild = () => {
         <div className="right-child-nav">
             <ul className="nav-ul">
                 <li className="option-nav">
-                    <Link to="/filterCourse/graphic">
+                    <Link to="/filterCourse">
                         گرافیک
                     </Link>
                 </li>
 
                 <li className="option-nav">
-                    <Link to="/filterCourse/system">
+                    <Link to="/filterCourse">
                         سیستم عامل
                     </Link>
                 </li>
 
                 <li className="option-nav">
-                    <Link to="/filterCourse/database">
+                    <Link to="/filterCourse">
                         بانک های اطلاعاتی
                     </Link>     
                 </li>
 
                 <li className="option-nav">
-                    <Link to="/filterCourse/mobile">
+                    <Link to="/filterCourse">
                         برنامه نویسی وب
                     </Link>
                 </li>
 
                 <li className="option-nav">
-                    <Link to="/filterCourse/mobile">
+                    <Link to="/filterCourse">
                         برنامه نویسی موبایل
                     </Link>
                 </li>
