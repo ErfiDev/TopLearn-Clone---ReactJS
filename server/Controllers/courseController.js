@@ -32,13 +32,17 @@ async function getCourse(req , res)
         {
             if(count && !from)
             {
-                let find = await CourseModel.find({}).limit(parseInt(count));
-                return res.json({status: 200 , data: find});
+                try{
+                    let find = await CourseModel.find({}).limit(parseInt(count));
+                    return res.json({status: 200 , data: find});
+                }catch(err){res.json({msg: err , status: 500})}
             }
 
-            let find = await CourseModel.find()
-            .limit(parseInt(count)).skip(parseInt(from));
-            return res.json({status: 200 , data: find});
+            try{
+                let find = await CourseModel.find()
+                .limit(parseInt(count)).skip(parseInt(from));
+                return res.json({status: 200 , data: find});
+            }catch(err){res.json({msg:err , status: 500})}
         }
     }
 }
@@ -65,18 +69,20 @@ async function postCourse(req , res)
     }
     else
     {
-        let data = await new CourseModel({
-            title,
-            price,
-            courseCategory,
-            imgSrc,
-            courseTime,
-            teacher
-        });
-
-        await data.save()
-        .then(()=> res.json({status: 201}))
-        .catch(err => res.json({status: 500 , msg: err}));
+        try{
+            let data = await new CourseModel({
+                title,
+                price,
+                courseCategory,
+                imgSrc,
+                courseTime,
+                teacher
+            });
+    
+            await data.save()
+            .then(()=> res.json({status: 201}))
+            .catch(err => res.json({status: 500 , msg: err}));
+        }catch(err){res.json({msg: err , status: 500})}
     }
 }
 

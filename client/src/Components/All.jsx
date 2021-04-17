@@ -49,7 +49,7 @@ class All extends React.PureComponent
                     <Switch>
                         <Route path="/login" component={Login} />
                         <Route path="/register" component={Register} /> 
-                        <Route path="/filterCourse" component={FilterCourse} /> 
+                        <Route path="/filterCourse/:category" component={FilterCourse} /> 
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/" exact component={HomeCourse} />
                     </Switch>
