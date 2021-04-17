@@ -58,7 +58,8 @@ const ChangePass = () => {
                     closeOnClick: true
                 });
             }else{
-                toast.success('Password changed!' , {
+                setPass({pass1: '' , pass2: ''});
+                return toast.success('Password changed!' , {
                     position: 'bottom-left',
                     closeOnClick: true
                 });
