@@ -141,8 +141,38 @@ async function logoutUser(req , res)
     }
 }
 
+async function changePass(req , res)
+{   
+    let {pass , id} = req.query;
+    if(!id && !pass){
+        return res.json({
+            msg: 'Complete required items',
+            status: 406
+        });
+    }else{
+        if(!id) return res.json({status: 404 , msg: 'not fund'});
+        try{
+            let hashPass = await bcrypt.hash(pass , 10);
+            let findAndUpdate = await UserModel.updateOne(
+                {_id: id},
+                {
+                    $set: {
+                        password: hashPass
+                    }
+                }
+            );
+
+            res.json({
+                msg: findAndUpdate,
+                status: 200
+            })
+        }catch(err){res.json({msg: err , status: 500})}
+    }
+}
+
 module.exports = {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    changePass
 }

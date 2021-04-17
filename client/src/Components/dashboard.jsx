@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {AppBar, Button, IconButton, makeStyles, Toolbar, Typography} from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import {useSelector} from 'react-redux';
+import ChangePass from './changePass';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = () => {
     const classes = useStyles();
+    const [toggle , setToggle] = useState(false);
+
     const user = useSelector(state => state.User);
 
     let date = new Date();
@@ -32,28 +35,38 @@ const Dashboard = () => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <div className="dashboard">
-                <div className="user-info">
-                    <ul>
-                        <li>
-                            <span className="info-span">fullname:</span>
-                            {user.fullname}
-                        </li>
+            {!toggle ? (
+                <div className="dashboard">
+                    <div className="user-info">
+                        <ul>
+                            <li>
+                                <span className="info-span">fullname:</span>
+                                {user.fullname}
+                            </li>
 
-                        <li>
-                            <span className="info-span">email:</span> 
-                            {user.email}
-                        </li>
+                            <li>
+                                <span className="info-span">email:</span> 
+                                {user.email}
+                            </li>
 
-                        <li>
-                            <span className="info-span">join date:</span> 
-                            {year + '/' + month }
-                        </li>
-                    </ul>
-                    <Button variant="contained" color="secondary" style={{outline: "none"}}>
-                        Change passwords
-                    </Button>
+                            <li>
+                                <span className="info-span">join date:</span> 
+                                {year + '/' + month }
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+            ) : (
+                <ChangePass />
+            )}
+            <div className="dahboard-btn-container">
+                <Button 
+                    variant="contained" 
+                    color="secondary" 
+                    style={{outline: "none",width: '50%'}}
+                    onClick={()=> setToggle(!toggle)}>
+                    {!toggle ? 'Change passwords' : 'Go to dashboard'}
+                </Button>
             </div>
         </div>
     );

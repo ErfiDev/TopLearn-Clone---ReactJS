@@ -9,5 +9,6 @@
     "getCategories": "http://localhost:4000/api/course/categories",
     "createCategory": "http://localhost:4000/api/course/create/category",
     "deleteCategory": "http://localhost:4000/api/course/delete/category",
-    "getCourseWithTitle": "http://localhost:4000/api/course/filter"
+    "getCourseWithTitle": "http://localhost:4000/api/course/filter",
+    "updateUser": "http://localhost:4000/api/user/update/password"
 }

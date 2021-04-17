@@ -1,5 +1,5 @@
 import httpService from './httpService';
-import {registerUser,loginUser,logoutUser} from './config.json';
+import {registerUser,loginUser,logoutUser,updateUser} from './config.json';
 
 export const userRegister = (user)=>{
     return httpService.post(
@@ -22,3 +22,9 @@ export const userLogout = (user)=>{
     );
 };
 
+export function updatePassword(id,pass)
+{
+    return httpService.put(
+        `${updateUser}?id=${id}&pass=${pass}`
+    );
+}
