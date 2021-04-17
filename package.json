@@ -1,0 +1,25 @@
+{
+  "name": "Danaco",
+  "version": "1.0.0",
+  "description": "Created by erfan hanifezade for testing and learning only\r - ReactJS\r - MongoDB\r - ExpressJS\r - NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErfanhanifezadeDeveloper/TopLearn-Clone---ReactJS.git",
+    "start": "node server/index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
+  },
+  "engines": {
+    "node": "15.14.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErfanhanifezadeDeveloper/TopLearn-Clone---ReactJS/issues"
+  },
+  "homepage": "https://github.com/ErfanhanifezadeDeveloper/TopLearn-Clone---ReactJS#readme"
+}
