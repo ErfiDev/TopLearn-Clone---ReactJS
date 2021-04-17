@@ -10,6 +10,7 @@ import FilterCourse from './Course/filter.layout';
 import Login from './Login/Login';
 import Footer from './Footer/Footer';
 import Register from './Register/Register';
+import Dashboard from './dashboard';
 import {ToastContainer} from 'react-toastify';
 import Helmet from 'react-helmet';
 import {createUser} from '../Action/userAction';
@@ -49,6 +50,7 @@ class All extends React.PureComponent
                         <Route path="/login" component={Login} />
                         <Route path="/register" component={Register} /> 
                         <Route path="/filterCourse" component={FilterCourse} /> 
+                        <Route path="/dashboard" component={Dashboard} />
                         <Route path="/" exact component={HomeCourse} />
                     </Switch>
                 </div>

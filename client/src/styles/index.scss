@@ -6,3 +6,47 @@
 @import 'login.scss';
 @import 'register.scss';
 
+.dashboard-container{
+    min-height: 400px;
+    height: auto;
+    width: 95%;
+    background: linear-gradient(to right , #00B4DB, #0083B0);
+    border-radius: 5px;
+
+    .dashboard{
+        min-height: 350px;
+        height: auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        padding: 35px;
+        .user-info{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            ul{
+                list-style: none;
+                font-family: "Poppins" , sans-serif;
+                font-size: 1.5em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                li{
+                    margin-bottom: 30px;
+                    background: rgba(255, 255, 255, 0.247);
+                    backdrop-filter: blur(1.5px);
+                    -webkit-backdrop-filter: blur(1.5px);
+                    border-radius: 30px;
+                    padding: 15px;
+                    .info-span{
+                        padding: 10px;
+                        margin-right: 10px;                 
+                    }
+                }
+            }
+        }
+    }
+}

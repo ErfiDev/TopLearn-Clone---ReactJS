@@ -76,7 +76,9 @@ class HeaderFirst extends React.Component
                     </div>
 
                     <div className="logo-container">
-                        <img src="./img/logo.svg" alt=""/>
+                        <Link to="/">
+                            <img src="./img/logo.svg" alt="logo"/>
+                        </Link>
                     </div>
                 </div>
             </div>
