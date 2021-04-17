@@ -23,6 +23,10 @@ mongoose.connect(
     ()=>{ console.log('Connecting DataBase Successfully!') }
 );
 
+App.get('/' , (req , res) =>{
+    res.send('welcome to danaco test api');
+});
+
 //Routes Middlewares
 App.use('/api/user' , userApi);
 App.use('/api/course' , courseApi);
