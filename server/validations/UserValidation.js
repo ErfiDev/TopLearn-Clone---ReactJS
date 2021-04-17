@@ -5,7 +5,7 @@ function registerValidation(data)
 {
     //User Register Schema
     const UserRegister = joi.object({
-        fullname: joi.string().min(5).max(80).alphanum().required(),
+        fullname: joi.string().min(5).max(80).required(),
         email: joi.string().required().email(),
         password: joi.string().min(8).required()
         .pattern(new RegExp("^[a-zA-Z0-9]+$")),
