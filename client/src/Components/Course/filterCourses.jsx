@@ -23,7 +23,6 @@ const FilterCourses = () => {
   const courses = useSelector((state) => state.courses);
   const categories = useSelector((state) => state.Categories);
   const dis = useDispatch();
-  console.log(Filtercourses);
 
   useEffect(() => {
     dis(getCategories());

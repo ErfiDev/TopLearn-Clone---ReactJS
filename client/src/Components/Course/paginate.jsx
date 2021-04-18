@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 
 const Paginate = ({ perPage, totalCourse, changePage }) => {
   const items = [];
@@ -6,6 +6,10 @@ const Paginate = ({ perPage, totalCourse, changePage }) => {
   for (let i = 1; i < Math.ceil(totalCourse / perPage) + 1; i++) {
     items.push(i);
   }
+
+  useEffect(()=>{
+    changePage(1);
+  } , [totalCourse]);
 
   return (
     <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
