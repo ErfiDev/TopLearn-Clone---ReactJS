@@ -554,7 +554,6 @@
 }
 .course-container .filter-courses-list {
   width: 98%;
-  min-height: 250px;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -585,19 +584,28 @@
   align-items: center;
   justify-content: space-around;
 }
-.course-container .filter-courses-list .course-filterd-container {
+.course-container .filter-courses-list .course-filter {
   width: 70%;
-  min-height: 500px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.course-container .filter-courses-list .course-filter .course-filterd-container {
+  width: 100%;
+  min-height: 200px;
   height: auto;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin-bottom: 25px;
 }
 .course-container .filter-courses-list .filter-option-container {
   width: 30%;
-  min-height: 500px;
+  min-height: 200px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -710,8 +718,8 @@
 }
 
 .in-filter {
-  width: 350px;
-  margin: 20px 15px 15px 15px;
+  width: 300px;
+  margin: 20px 5px 5px 10px;
 }
 
 @media only screen and (max-width: 1020px) {

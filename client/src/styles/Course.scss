@@ -79,7 +79,6 @@ $bc: "background-color";
 
     .filter-courses-list{
         width: 98%;
-        min-height: 250px;
         height: auto;
         @include Flex(row,flex-start,center);
         flex-wrap: wrap;
@@ -100,18 +99,23 @@ $bc: "background-color";
             }
         }
 
-        .course-filterd-container{
+        .course-filter{
             width: 70%;
-            min-height: 500px;
             height: auto;
-            // #{$bc}: red;
-            @include Flex(row,flex-start,space-around);
-            flex-wrap: wrap;
+            @include Flex(column, center, flex-start);
+            .course-filterd-container{
+                width: 100%;
+                min-height: 200px;
+                height: auto;
+                @include Flex(row,flex-start,space-around);
+                flex-wrap: wrap;
+                margin-bottom: 25px;
+            }
         }
 
         .filter-option-container{
             width: 30%;
-            min-height: 500px;
+            min-height: 200px;
             height: auto;
             @include Flex(column,center,flex-start);
             font-family: 'Poppins' , sans-serif;
@@ -226,8 +230,8 @@ $bc: "background-color";
 }
 
 .in-filter{
-    width: 350px;
-    margin: 20px 15px 15px 15px;
+    width: 300px;
+    margin: 20px 5px 5px 10px;
 }
 
 
